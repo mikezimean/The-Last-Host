@@ -45,8 +45,13 @@ func _on_base_world_player_dashed(cooldown):
 	$DashCooldownIndicator.start(cooldown)
 
 
-func _on_base_world_player_shoot(ammo_remaining):
-	$AmmoCounter.current_ammo -= 1 # proto test until ammo count actually get handled in weapon/player
+func _on_base_world_player_shoot():
+	$AmmoCounter.shoot()
+
+
+func _on_base_world_player_weapon_changed(weapon_name, ammo, max_ammo):
+	$AmmoCounter.current_ammo = ammo
+	$AmmoCounter.max_ammo = max_ammo
 
 
 func _on_timer_timeout():
@@ -62,3 +67,5 @@ func _on_timer_timeout():
 
 func _on_cycle_input_timer_timeout():
 	can_cycle = true
+
+

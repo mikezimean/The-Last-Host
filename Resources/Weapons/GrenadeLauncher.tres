@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c84bwq5wbv42r" path="res://Scenes/Casing/GrenadeCasing.tscn" id="1_dccmu"]
 [ext_resource type="Script" path="res://Resources/WeaponData.gd" id="1_v3qbd"]
-[ext_resource type="Texture2D" uid="uid://dmiug2ohl7dks" path="res://Assets/Originals/Sprite/Grenade_Launcher_12.png" id="2_34ahq"]
+[ext_resource type="Texture2D" uid="uid://cykx8kmm2acs6" path="res://Assets/Originals/Sprite/Grenade_Launcher_12.png" id="2_34ahq"]
 [ext_resource type="PackedScene" uid="uid://b331prjiksf27" path="res://Scenes/Projectile/GrenadeProjectile.tscn" id="2_dk13m"]
 
 [resource]
@@ -16,5 +16,6 @@ barrel_offset = 14.0
 projectile_speed = 250.0
 cooldown = 2.0
 damage = 50
+max_ammunition = 10
 projectile_scene = ExtResource("2_dk13m")
 casing_scene = ExtResource("1_dccmu")

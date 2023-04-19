@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Resources/WeaponData.gd" id="1_ccynj"]
 [ext_resource type="PackedScene" uid="uid://dxlkajgtpgl7g" path="res://Scenes/Casing/ShellCasing.tscn" id="1_yiii1"]
-[ext_resource type="Texture2D" uid="uid://dxuqjjxdx3rvn" path="res://Assets/Originals/Sprite/SawnOff_6.png" id="2_kflmi"]
+[ext_resource type="Texture2D" uid="uid://cxewho41l4n3i" path="res://Assets/Originals/Sprite/SawnOff_6.png" id="2_kflmi"]
 [ext_resource type="PackedScene" uid="uid://556mg5gd3b31" path="res://Scenes/Projectile/BulletProjectile.tscn" id="2_x4cs0"]
 
 [resource]
@@ -16,5 +16,6 @@ barrel_offset = 12.0
 projectile_speed = 900.0
 cooldown = 1.0
 damage = 30
+max_ammunition = 80
 projectile_scene = ExtResource("2_x4cs0")
 casing_scene = ExtResource("1_yiii1")

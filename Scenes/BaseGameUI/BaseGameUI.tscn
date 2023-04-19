@@ -186,5 +186,6 @@ libraries = {
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="player_dashed" from="SubViewportContainer/SubViewport/BaseWorld" to="." method="_on_base_world_player_dashed"]
 [connection signal="player_shoot" from="SubViewportContainer/SubViewport/BaseWorld" to="." method="_on_base_world_player_shoot"]
+[connection signal="player_weapon_changed" from="SubViewportContainer/SubViewport/BaseWorld" to="." method="_on_base_world_player_weapon_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="CycleInputTimer" to="." method="_on_cycle_input_timer_timeout"]

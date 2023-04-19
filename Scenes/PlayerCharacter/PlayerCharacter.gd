@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal projectile_shot(projectile_scene : PackedScene, projectile_position: Vector2, projectile_velocity: Vector2, projectile_damage : float)
 signal casing_dropped(casing_scene : PackedScene, casing_position : Vector2)
 signal dash(cooldown : float)
+signal weapon_changed(weapon_name : String, ammo : int, max_ammo : int)
 
 @export var acceleration : float = 600
 @export var max_speed : float = 125
@@ -20,6 +21,11 @@ var facing_direction : Vector2
 var is_dashing : bool = false
 var can_dash : bool = true
 
+#test init weapon ammo 
+func _ready():
+	for weapon in weapons:
+		weapon.ammunition_count = weapon.max_ammunition
+
 func _update_weapon_sprite():
 	var current_weapon : WeaponData = get_current_weapon()
 	$WeaponStackedSprite2D.y_offset = current_weapon.y_offset
@@ -28,14 +34,26 @@ func _update_weapon_sprite():
 	$WeaponText2D/Label.text = current_weapon.name
 	$WeaponText2D/AnimationPlayer.play("FadeOut")
 	face_direction(facing_direction)
+	
+	if current_weapon.remaining_cooldown > 0:
+		$CooldownTimer.start(current_weapon.remaining_cooldown)
+	else:
+		can_shoot = true
+	emit_signal("weapon_changed", current_weapon.name, current_weapon.ammunition_count, current_weapon.max_ammunition)
 
 func cycle_next():
+	get_current_weapon().remaining_cooldown = $CooldownTimer.time_left
+	$CooldownTimer.stop()
+	
 	current_weapon_iter += 1
 	if current_weapon_iter >= weapons.size():
 		current_weapon_iter = 0
 	_update_weapon_sprite()
 
 func cycle_prev():
+	get_current_weapon().remaining_cooldown = $CooldownTimer.time_left
+	$CooldownTimer.stop()
+	
 	current_weapon_iter -= 1
 	if current_weapon_iter < 0:
 		current_weapon_iter = weapons.size() - 1
@@ -79,9 +97,11 @@ func move():
 func shoot():
 	if is_shooting and can_shoot:
 		var current_weapon : WeaponData = get_current_weapon()
+		if current_weapon.ammunition_count < 1: return
 		var projectile_vector = facing_direction * current_weapon.projectile_speed
 		var projectile_position = position + (facing_direction * (current_weapon.weapon_offset + current_weapon.barrel_offset))
 		var casing_position = position + (facing_direction * current_weapon.weapon_offset)
+		current_weapon.ammunition_count -= 1
 		emit_signal("projectile_shot", current_weapon.projectile_scene, projectile_position, projectile_vector, current_weapon.damage)
 		can_shoot = false
 		$CooldownTimer.start(current_weapon.cooldown)
