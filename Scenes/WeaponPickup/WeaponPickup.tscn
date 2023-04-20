@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpu5m7vuunslf"]
+
+[ext_resource type="PackedScene" uid="uid://blat6y3xgu67s" path="res://Scenes/StackedSprite/StackedSprite2D.tscn" id="1_5rxgg"]
+[ext_resource type="Script" path="res://Scenes/WeaponPickup/WeaponPickup.gd" id="1_b3jl2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qiopr"]
+
+[node name="WeaponPickup" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_b3jl2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qiopr")
+
+[node name="StackedSprite2D" parent="." instance=ExtResource("1_5rxgg")]
+show_sprites = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

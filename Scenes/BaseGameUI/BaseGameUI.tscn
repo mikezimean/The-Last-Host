@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d2b0746k2jh61" path="res://Scenes/BaseLevel/Levels/Level2.tscn" id="4_4fwkb"]
 [ext_resource type="PackedScene" uid="uid://oahehvtdu4x0" path="res://Scenes/BaseGameUI/ammo_counter.tscn" id="4_4sfmh"]
 [ext_resource type="PackedScene" uid="uid://c7i2wvfncmeuy" path="res://Scenes/BaseGameUI/controls.tscn" id="5_5d3nm"]
+[ext_resource type="PackedScene" uid="uid://bwobjfq04r045" path="res://Scenes/BaseGameUI/inventory_bar.tscn" id="8_1jloo"]
 [ext_resource type="PackedScene" uid="uid://c5xt1k3yfkoe7" path="res://Scenes/Wardrobe/WardrobePanelContainer.tscn" id="8_wf1wq"]
 [ext_resource type="Resource" uid="uid://c6qsygo8033ug" path="res://Resources/Outfits/BlueRobe.tres" id="9_bmm2a"]
 [ext_resource type="Resource" uid="uid://c8eqecqf48uv6" path="res://Resources/Outfits/FlowerRobe.tres" id="10_fwkga"]
@@ -171,12 +172,26 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -184.0
-offset_top = -64.0
-offset_right = 72.0
-offset_bottom = 64.0
+offset_left = 840.0
+offset_top = 236.0
+offset_right = 1096.0
+offset_bottom = 364.0
 grow_horizontal = 0
 grow_vertical = 2
+
+[node name="InventoryBar" parent="." instance=ExtResource("8_1jloo")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -84.0
+offset_right = 190.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

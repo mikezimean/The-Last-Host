@@ -21,9 +21,13 @@ func _on_level_player_dashed(cooldown):
 func _on_level_player_shoot():
 	$AmmoCounter.shoot()
 
-func _on_level_player_weapon_changed(weapon_name, ammo, max_ammo):
+func _on_level_player_weapon_changed(weapon_name, ammo, max_ammo, index):
 	$AmmoCounter.current_ammo = ammo
 	$AmmoCounter.max_ammo = max_ammo
+	$InventoryBar.select_slot(index)
+
+func _on_level_player_new_weapon(weapon_name : String):
+	$InventoryBar.activate_new_slot(weapon_name)
 
 func _on_level_wardrobe_access_changed(has_access_flag : bool):
 	has_wardrobe_access = has_access_flag
@@ -47,6 +51,7 @@ func _load_level(level_scene : PackedScene):
 	level_instance.player_dashed.connect(_on_level_player_dashed)
 	level_instance.player_shoot.connect(_on_level_player_shoot)
 	level_instance.player_weapon_changed.connect(_on_level_player_weapon_changed)
+	level_instance.player_new_weapon.connect(_on_level_player_new_weapon)
 	level_instance.player_reached_exit.connect(_on_level_player_reached_exit)
 	level_instance.wardrobe_access_changed.connect(_on_level_wardrobe_access_changed)
 	if current_outfit: 

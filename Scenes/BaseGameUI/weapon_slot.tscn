@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1fi6blxu8tf3"]
+
+[ext_resource type="Script" path="res://Scenes/BaseGameUI/weapon_slot.gd" id="1_2n7ro"]
+[ext_resource type="Texture2D" uid="uid://d12e0818sbluq" path="res://Assets/Originals/Sprite/weapon_previews.png" id="2_08ixj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vbbce"]
+resource_local_to_scene = true
+bg_color = Color(0.6, 0.6, 0.6, 0.392157)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cty7c"]
+resource_local_to_scene = true
+atlas = ExtResource("2_08ixj")
+region = Rect2(0, 0, 32, 32)
+
+[node name="WeaponSlot" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_2n7ro")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vbbce")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_cty7c")
