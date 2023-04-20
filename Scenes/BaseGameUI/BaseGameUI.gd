@@ -10,6 +10,7 @@ var can_cycle : bool = true
 var current_level : int = 0
 var current_level_node
 var has_wardrobe_access : bool = false
+var current_outfit
 
 func _update_level_counter():
 	$LabelLevelCounter.text = "Level %d" % (current_level + 1)
@@ -47,6 +48,8 @@ func _load_level(level_scene : PackedScene):
 	level_instance.player_weapon_changed.connect(_on_level_player_weapon_changed)
 	level_instance.player_reached_exit.connect(_on_level_player_reached_exit)
 	level_instance.wardrobe_access_changed.connect(_on_level_wardrobe_access_changed)
+	if current_outfit: 
+		level_instance.set_pc_outfit(current_outfit)
 	current_level_node = level_instance
 
 func _load_current_level():
@@ -119,4 +122,5 @@ func _ready():
 	_load_current_level()
 
 func _on_wardrobe_panel_container_outfit_changed(sprite_stack):
+	current_outfit = sprite_stack
 	current_level_node.set_pc_outfit(sprite_stack)

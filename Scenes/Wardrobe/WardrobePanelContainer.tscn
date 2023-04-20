@@ -32,12 +32,6 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Blue Robe"
-
 [node name="CloseButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3

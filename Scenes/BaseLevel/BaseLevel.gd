@@ -15,6 +15,7 @@ signal wardrobe_access_changed(has_access_flag : bool)
 @onready var text_container = $TextContainer
 var muzzle_flash_scene = preload("res://Scenes/MuzzleFlash/MuzzleFlash.tscn")
 var floating_text_scene = preload("res://Scenes/FloatingText/FloatingText2D.tscn")
+var current_outfit
 
 func spawn_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, team : TeamConstants.Teams, damage : float, shot_data : ShotData):
 	var projectile_instance = projectile_scene.instantiate()
@@ -82,6 +83,9 @@ func set_pc_dashing(dashing_flag : bool):
 	pc_node.is_dashing = dashing_flag
 
 func set_pc_outfit(sprite_stack : Texture2D):
+	current_outfit = sprite_stack
+	if pc_node == null:
+		return
 	pc_node.set_body_sprite(sprite_stack)
 
 func _on_enemy_damage_taken(enemy_position : Vector2, damage : float):
@@ -111,6 +115,9 @@ func _ready():
 	_attach_enemy_signals()
 	_attach_spawners_signals()
 	_attach_wardrobe_signals()
+	set_pc_direction(Vector2(1,0))
+	if current_outfit:
+		set_pc_outfit(current_outfit)
 
 func _level_complete():
 	emit_signal("player_reached_exit")
