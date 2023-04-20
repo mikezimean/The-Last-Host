@@ -40,13 +40,14 @@ func spawn_floating_text(text_position : Vector2, text_value : String):
 	floating_text_instance.text = text_value
 	text_container.add_child(floating_text_instance)
 
-func pc_shoots_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float):
+func pc_shoots_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float, consume_ammo : bool):
 	spawn_projectile(projectile_scene, projectile_position, projectile_velocity, TeamConstants.Teams.PLAYER, damage)
 	spawn_muzzle_flash(projectile_position)
-	emit_signal("player_shoot") # ammo not handled for now
+	if consume_ammo: # the signal is catched by the UI to update the ammo counter
+		emit_signal("player_shoot")
 
-func _on_player_character_projectile_shot(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float):
-	pc_shoots_projectile(projectile_scene, projectile_position, projectile_velocity, damage)
+func _on_player_character_projectile_shot(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float, consume_ammo : bool):
+	pc_shoots_projectile(projectile_scene, projectile_position, projectile_velocity, damage, consume_ammo)
 
 func _on_player_character_dash(cooldown):
 	emit_signal("player_dashed", cooldown)

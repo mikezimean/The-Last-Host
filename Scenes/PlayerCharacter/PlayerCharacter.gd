@@ -101,11 +101,10 @@ func shoot():
 		var projectile_vector = facing_direction * current_weapon.projectile_speed
 		var casing_position = position + (facing_direction * current_weapon.weapon_offset)
 		$WeaponShot.shoot(current_weapon.shots)
-		current_weapon.ammunition_count -= 1
+		
 		can_shoot = false
 		$CooldownTimer.start(current_weapon.cooldown)
-		await get_tree().create_timer(0.0167).timeout
-		emit_signal("casing_dropped", current_weapon.casing_scene, casing_position)
+		
 
 func _physics_process(delta):
 	move_state(delta)
@@ -123,8 +122,13 @@ func _on_cooldown_timer_timeout():
 func _on_dash_timer_timeout():
 	can_dash = true
 
-func _on_weapon_shot_projectile_shot(projectile_scene, angle_offset):
+func _on_weapon_shot_projectile_shot(projectile_scene, angle_offset, consume_ammo):
 	var current_weapon : WeaponData = get_current_weapon()
 	var projectile_vector = (facing_direction * current_weapon.projectile_speed).rotated(angle_offset)
 	var projectile_position = position + (facing_direction * (current_weapon.weapon_offset + current_weapon.barrel_offset))
-	emit_signal("projectile_shot", projectile_scene, projectile_position, projectile_vector, current_weapon.damage)
+	emit_signal("projectile_shot", projectile_scene, projectile_position, projectile_vector, current_weapon.damage, consume_ammo)
+	if consume_ammo:
+		current_weapon.ammunition_count -= 1
+		await get_tree().create_timer(0.0167).timeout
+		var casing_position = position + (facing_direction * current_weapon.weapon_offset)
+		emit_signal("casing_dropped", current_weapon.casing_scene, casing_position)

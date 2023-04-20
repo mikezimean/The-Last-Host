@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c1cnrscwif61w" path="res://Scenes/Casing/BulletCasing.tscn" id="1_4r84e"]
 [ext_resource type="Script" path="res://Resources/WeaponData.gd" id="1_vpuqn"]
 [ext_resource type="PackedScene" uid="uid://556mg5gd3b31" path="res://Scenes/Projectile/BulletProjectile.tscn" id="2_ouo2s"]
-[ext_resource type="Texture2D" uid="uid://cjd3p2l46s12k" path="res://Assets/Originals/Sprite/machine_gun_9.png" id="4_4jiu1"]
+[ext_resource type="Texture2D" uid="uid://f6cqrgb5mhp8" path="res://Assets/Originals/Sprite/machine_gun_9.png" id="4_4jiu1"]
 [ext_resource type="Resource" uid="uid://knhhd188k6hs" path="res://Resources/Shots/BulletStraightInstant.tres" id="4_c28qe"]
 [ext_resource type="Script" path="res://Resources/ShotData.gd" id="5_dlpjv"]
 

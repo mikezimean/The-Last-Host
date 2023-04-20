@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://hji8le5si4gx" path="res://Scenes/PlayerCharacter/PlayerCharacter.tscn" id="1_bayas"]
 [ext_resource type="Script" path="res://Scenes/BaseWorld/BaseWorld.gd" id="1_u1yl7"]
-[ext_resource type="Texture2D" uid="uid://ns3qpxnlxk6a" path="res://Assets/Originals/Tiles/Mossy_floor.png" id="2_1vj6n"]
+[ext_resource type="Texture2D" uid="uid://djsayslb45vy6" path="res://Assets/Originals/Tiles/Mossy_floor.png" id="2_1vj6n"]
 [ext_resource type="PackedScene" uid="uid://cjpv7pmyt7546" path="res://Scenes/EnemyCharacter/EnemyCharacter.tscn" id="2_r56ja"]
-[ext_resource type="Texture2D" uid="uid://pijchglmw0es" path="res://Assets/Originals/Tiles/Steel_block.png" id="3_31sad"]
+[ext_resource type="Texture2D" uid="uid://u28d23enkro8" path="res://Assets/Originals/Tiles/Steel_block.png" id="3_31sad"]
 [ext_resource type="PackedScene" uid="uid://du8jomg2cob25" path="res://Scenes/Spawners/ModularSpawner.tscn" id="3_gq04k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7p3f"]
