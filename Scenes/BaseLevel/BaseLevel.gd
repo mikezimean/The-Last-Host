@@ -6,6 +6,7 @@ signal player_shoot(ammo_remaining)
 signal player_weapon_changed(weapon_name : String, ammo : int, max_ammo : int, index : int)
 signal player_new_weapon(weapon_name : String)
 signal player_reached_exit
+signal wardrobe_access_changed(has_access_flag : bool)
 
 @onready var pc_node = $CharacterContainer/PlayerCharacter
 @onready var character_container = $CharacterContainer
@@ -15,6 +16,7 @@ signal player_reached_exit
 @onready var text_container = $TextContainer
 var muzzle_flash_scene = preload("res://Scenes/MuzzleFlash/MuzzleFlash.tscn")
 var floating_text_scene = preload("res://Scenes/FloatingText/FloatingText2D.tscn")
+var current_outfit
 
 func spawn_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, team : TeamConstants.Teams, damage : float, shot_data : ShotData):
 	var projectile_instance = projectile_scene.instantiate()
@@ -63,6 +65,9 @@ func _on_player_character_weapon_changed(weapon_name, ammo, max_ammo, index):
 func _on_player_character_casing_dropped(casing_scene, casing_position):
 	spawn_casing(casing_scene, casing_position)
 
+func _on_wardrobe_access_changed(has_access_flag : bool):
+	emit_signal("wardrobe_access_changed", has_access_flag)
+
 func set_pc_shooting(shooting_flag : bool = true):
 	pc_node.is_shooting = shooting_flag
 
@@ -77,6 +82,12 @@ func set_pc_cycle_prev():
 
 func set_pc_dashing(dashing_flag : bool):
 	pc_node.is_dashing = dashing_flag
+
+func set_pc_outfit(sprite_stack : Texture2D):
+	current_outfit = sprite_stack
+	if pc_node == null:
+		return
+	pc_node.set_body_sprite(sprite_stack)
 
 func _on_enemy_damage_taken(enemy_position : Vector2, damage : float):
 	spawn_floating_text(enemy_position, str(damage))
@@ -96,9 +107,18 @@ func _attach_spawners_signals():
 	for child in $SpawnerContainer.get_children():
 		child.spawn_enemy.connect(_on_spawner_spawn_enemy)
 
+func _attach_wardrobe_signals():
+	for child in $InteractablesContainer.get_children():
+		if child is Wardrobe:
+			child.wardrobe_access_changed.connect(_on_wardrobe_access_changed)
+
 func _ready():
 	_attach_enemy_signals()
 	_attach_spawners_signals()
+	_attach_wardrobe_signals()
+	set_pc_direction(Vector2(1,0))
+	if current_outfit:
+		set_pc_outfit(current_outfit)
 
 func _level_complete():
 	emit_signal("player_reached_exit")
@@ -109,3 +129,6 @@ func _on_exit_area_2d_body_entered(body):
 
 func _on_player_character_new_weapon(weapon_name):
 	emit_signal("player_new_weapon", weapon_name)
+
+func _on_wardrobe_wardrobe_access_changed(has_access_flag):
+	emit_signal("wardrobe_access_changed", has_access_flag)

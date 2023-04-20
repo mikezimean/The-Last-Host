@@ -11,7 +11,7 @@ func _detonate():
 func _on_projectile_expired():
 	_detonate()
 
-func _on_new_body_collided(opponent_node : Node2D):
+func _on_new_body_collided(_opponent_node : Node2D):
 	_detonate()
 
 func _activate_collision_mask(layer):

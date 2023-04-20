@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="OutfitData" load_steps=3 format=3 uid="uid://c8eqecqf48uv6"]
+
+[ext_resource type="Script" path="res://Resources/OutfitData.gd" id="1_ka435"]
+[ext_resource type="Texture2D" uid="uid://cu11ky1fgvnkb" path="res://Assets/Originals/Sprite/Alex_flower_robe_9.png" id="2_u03n7"]
+
+[resource]
+script = ExtResource("1_ka435")
+name = "Flower Robe"
+sprite_stack = ExtResource("2_u03n7")
