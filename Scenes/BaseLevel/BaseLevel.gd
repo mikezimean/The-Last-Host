@@ -81,6 +81,9 @@ func set_pc_cycle_prev():
 func set_pc_dashing(dashing_flag : bool):
 	pc_node.is_dashing = dashing_flag
 
+func set_pc_outfit(sprite_stack : Texture2D):
+	pc_node.set_body_sprite(sprite_stack)
+
 func _on_enemy_damage_taken(enemy_position : Vector2, damage : float):
 	spawn_floating_text(enemy_position, str(damage))
 

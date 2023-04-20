@@ -66,6 +66,9 @@ func get_current_weapon():
 		current_weapon_iter = 0
 	return weapons[current_weapon_iter]
 
+func set_body_sprite(sprite_stack : Texture2D):
+	$BodyStackedSprite2D.texture = sprite_stack
+
 func face_direction(new_direction : Vector2):
 	facing_direction = new_direction.normalized()
 	animation_tree.set("parameters/Idle/blend_position", facing_direction)

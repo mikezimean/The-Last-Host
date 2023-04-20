@@ -69,7 +69,7 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	Input.set_custom_mouse_cursor(null)
 
-func _on_close_button_pressed():
+func _on_wardrobe_panel_container_wardrobe_closed():
 	_close_wardrobe()
 
 func _start_cycle_input_cooldown():
@@ -117,3 +117,6 @@ func _on_cycle_input_timer_timeout():
 
 func _ready():
 	_load_current_level()
+
+func _on_wardrobe_panel_container_outfit_changed(sprite_stack):
+	current_level_node.set_pc_outfit(sprite_stack)
