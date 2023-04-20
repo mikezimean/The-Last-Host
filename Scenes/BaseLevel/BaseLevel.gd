@@ -31,18 +31,18 @@ func spawn_projectile(projectile_scene : PackedScene, projectile_position : Vect
 func spawn_muzzle_flash(flash_position : Vector2):
 	var muzzle_flash_instance = muzzle_flash_scene.instantiate()
 	muzzle_flash_instance.position = flash_position
-	projectile_container.add_child(muzzle_flash_instance)
+	projectile_container.call_deferred("add_child", muzzle_flash_instance)
 
 func spawn_casing(casing_scene : PackedScene, casing_position : Vector2):
 	var casing_instance = casing_scene.instantiate()
 	casing_instance.position = casing_position
-	rubbish_container.add_child(casing_instance)
+	rubbish_container.call_deferred("add_child", casing_instance)
 
 func spawn_floating_text(text_position : Vector2, text_value : String):
 	var floating_text_instance = floating_text_scene.instantiate()
 	floating_text_instance.position = text_position
 	floating_text_instance.text = text_value
-	text_container.add_child(floating_text_instance)
+	text_container.call_deferred("add_child", floating_text_instance)
 
 func pc_shoots_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float, shot_data : ShotData):
 	spawn_projectile(projectile_scene, projectile_position, projectile_velocity, TeamConstants.Teams.PLAYER, damage, shot_data)

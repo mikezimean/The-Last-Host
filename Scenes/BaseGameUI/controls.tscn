@@ -11,6 +11,7 @@ offset_bottom = 128.0
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 128.0
+mouse_filter = 2
 color = Color(1, 1, 1, 0.207843)
 
 [node name="Label" type="Label" parent="."]
