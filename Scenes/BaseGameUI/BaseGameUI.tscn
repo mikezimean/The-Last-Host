@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2m6vj0fmbt5e"]
+[gd_scene load_steps=16 format=3 uid="uid://b2m6vj0fmbt5e"]
 
 [ext_resource type="Script" path="res://Scenes/BaseGameUI/BaseGameUI.gd" id="1_81gpw"]
 [ext_resource type="PackedScene" uid="uid://bhm44a1hxqdo4" path="res://Scenes/BaseLevel/Levels/LevelIntro.tscn" id="2_2pmlw"]
@@ -7,6 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://d2b0746k2jh61" path="res://Scenes/BaseLevel/Levels/Level2.tscn" id="4_4fwkb"]
 [ext_resource type="PackedScene" uid="uid://oahehvtdu4x0" path="res://Scenes/BaseGameUI/ammo_counter.tscn" id="4_4sfmh"]
 [ext_resource type="PackedScene" uid="uid://c7i2wvfncmeuy" path="res://Scenes/BaseGameUI/controls.tscn" id="5_5d3nm"]
+[ext_resource type="PackedScene" uid="uid://c5xt1k3yfkoe7" path="res://Scenes/Wardrobe/WardrobePanelContainer.tscn" id="8_wf1wq"]
+[ext_resource type="Resource" uid="uid://c6qsygo8033ug" path="res://Resources/Outfits/BlueRobe.tres" id="9_bmm2a"]
+[ext_resource type="Resource" uid="uid://c8eqecqf48uv6" path="res://Resources/Outfits/FlowerRobe.tres" id="10_fwkga"]
+[ext_resource type="Resource" uid="uid://6tuf88mvvqem" path="res://Resources/Outfits/GraceRobe.tres" id="11_xtsem"]
+[ext_resource type="PackedScene" uid="uid://hfneyfwbwpbg" path="res://Scenes/BaseGameUI/InteractInstructions.tscn" id="12_l8olk"]
 
 [sub_resource type="Animation" id="Animation_vqbng"]
 length = 0.001
@@ -172,7 +177,6 @@ offset_right = 72.0
 offset_bottom = 64.0
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
@@ -187,7 +191,52 @@ libraries = {
 "": SubResource("AnimationLibrary_r1bx4")
 }
 
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="WardrobePanelContainer" parent="MarginContainer/Control/CenterContainer" instance=ExtResource("8_wf1wq")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+outfits = Array[Resource("res://Resources/OutfitData.gd")]([ExtResource("9_bmm2a"), ExtResource("10_fwkga"), ExtResource("11_xtsem")])
+
+[node name="InteractInstructions" parent="." instance=ExtResource("12_l8olk")]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -69.0
+offset_right = 128.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="CycleInputTimer" to="." method="_on_cycle_input_timer_timeout"]
+[connection signal="outfit_changed" from="MarginContainer/Control/CenterContainer/WardrobePanelContainer" to="." method="_on_wardrobe_panel_container_outfit_changed"]
+[connection signal="wardrobe_closed" from="MarginContainer/Control/CenterContainer/WardrobePanelContainer" to="." method="_on_wardrobe_panel_container_wardrobe_closed"]

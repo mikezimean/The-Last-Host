@@ -66,6 +66,9 @@ func get_current_weapon():
 		current_weapon_iter = 0
 	return weapons[current_weapon_iter]
 
+func set_body_sprite(sprite_stack : Texture2D):
+	$BodyStackedSprite2D.texture = sprite_stack
+
 func face_direction(new_direction : Vector2):
 	facing_direction = new_direction.normalized()
 	animation_tree.set("parameters/Idle/blend_position", facing_direction)
@@ -98,13 +101,9 @@ func shoot():
 	if is_shooting and can_shoot:
 		var current_weapon : WeaponData = get_current_weapon()
 		if current_weapon.ammunition_count < 1: return
-		var projectile_vector = facing_direction * current_weapon.projectile_speed
-		var casing_position = position + (facing_direction * current_weapon.weapon_offset)
 		$WeaponShot.shoot(current_weapon.shots)
-		
 		can_shoot = false
 		$CooldownTimer.start(current_weapon.cooldown)
-		
 
 func _physics_process(delta):
 	move_state(delta)

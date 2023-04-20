@@ -9,6 +9,8 @@ var time = [0,0,0] # H,M,S
 var can_cycle : bool = true
 var current_level : int = 0
 var current_level_node
+var has_wardrobe_access : bool = false
+var current_outfit
 
 func _update_level_counter():
 	$LabelLevelCounter.text = "Level %d" % (current_level + 1)
@@ -23,6 +25,16 @@ func _on_level_player_weapon_changed(weapon_name, ammo, max_ammo):
 	$AmmoCounter.current_ammo = ammo
 	$AmmoCounter.max_ammo = max_ammo
 
+func _on_level_wardrobe_access_changed(has_access_flag : bool):
+	has_wardrobe_access = has_access_flag
+	$InteractInstructions.visible = has_wardrobe_access
+
+func _open_wardrobe():
+	%WardrobePanelContainer.show()
+
+func _close_wardrobe():
+	%WardrobePanelContainer.hide()
+
 func _clear_levels():
 	current_level_node = null
 	for level_instance in level_container_node.get_children():
@@ -36,6 +48,9 @@ func _load_level(level_scene : PackedScene):
 	level_instance.player_shoot.connect(_on_level_player_shoot)
 	level_instance.player_weapon_changed.connect(_on_level_player_weapon_changed)
 	level_instance.player_reached_exit.connect(_on_level_player_reached_exit)
+	level_instance.wardrobe_access_changed.connect(_on_level_wardrobe_access_changed)
+	if current_outfit: 
+		level_instance.set_pc_outfit(current_outfit)
 	current_level_node = level_instance
 
 func _load_current_level():
@@ -58,6 +73,9 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	Input.set_custom_mouse_cursor(null)
 
+func _on_wardrobe_panel_container_wardrobe_closed():
+	_close_wardrobe()
+
 func _start_cycle_input_cooldown():
 	can_cycle = false
 	$CycleInputTimer.start()
@@ -67,7 +85,7 @@ func _unhandled_input(event):
 		var current_window = get_window()
 		var mouse_position = event.position - Vector2(current_window.content_scale_size / 2) 
 		current_level_node.set_pc_direction(mouse_position)
-	elif event is InputEventMouseButton:
+	else:
 		if event.is_action_pressed("shoot"):
 			current_level_node.set_pc_shooting(true)
 		elif event.is_action_released("shoot"):
@@ -76,6 +94,9 @@ func _unhandled_input(event):
 			current_level_node.set_pc_dashing(true)
 		elif event.is_action_released("dash"):
 			current_level_node.set_pc_dashing(false)
+		elif event.is_action_pressed("interact"):
+			if has_wardrobe_access:
+				_open_wardrobe()
 		elif event.is_action("cycle_next"):
 			if can_cycle:
 				current_level_node.set_pc_cycle_next()
@@ -100,3 +121,7 @@ func _on_cycle_input_timer_timeout():
 
 func _ready():
 	_load_current_level()
+
+func _on_wardrobe_panel_container_outfit_changed(sprite_stack):
+	current_outfit = sprite_stack
+	current_level_node.set_pc_outfit(sprite_stack)
