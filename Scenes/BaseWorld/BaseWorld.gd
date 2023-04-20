@@ -1,5 +1,5 @@
 extends Node2D
-class_name World
+class_name BaseWorld
 
 signal player_dashed(cooldown : float)
 signal player_shoot
@@ -8,6 +8,8 @@ signal player_weapon_changed(weapon_name : String, ammo : int, max_ammo : int)
 @onready var pc_node = $CharacterContainer/PlayerCharacter
 @onready var character_container = $CharacterContainer
 @onready var projectile_container = $ProjectileContainer
+@onready var rubbish_container = $RubbishContainer
+@onready var collectible_container = $CollectibleContainer
 @onready var text_container = $TextContainer
 var muzzle_flash_scene = preload("res://Scenes/MuzzleFlash/MuzzleFlash.tscn")
 var floating_text_scene = preload("res://Scenes/FloatingText/FloatingText2D.tscn")
@@ -30,7 +32,7 @@ func spawn_muzzle_flash(flash_position : Vector2):
 func spawn_casing(casing_scene : PackedScene, casing_position : Vector2):
 	var casing_instance = casing_scene.instantiate()
 	casing_instance.position = casing_position
-	projectile_container.add_child(casing_instance)
+	rubbish_container.add_child(casing_instance)
 
 func spawn_floating_text(text_position : Vector2, text_value : String):
 	var floating_text_instance = floating_text_scene.instantiate()
