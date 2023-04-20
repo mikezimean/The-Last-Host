@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://igq3xtj1omvs"]
 
-[ext_resource type="Texture2D" uid="uid://djntognfg11p7" path="res://Assets/Originals/Sprite/grenade.png" id="1_gfogb"]
+[ext_resource type="Texture2D" uid="uid://cy5n7pjkrlr67" path="res://Assets/Originals/Sprite/grenade.png" id="1_gfogb"]
 [ext_resource type="Script" path="res://Scenes/Projectile/RigidBodyProjectile.gd" id="1_mmw2m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2blfs"]
 radius = 2.0
 
 [node name="RigidBodyProjectile" type="RigidBody2D"]
-collision_mask = 0
+collision_mask = 2
 script = ExtResource("1_mmw2m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

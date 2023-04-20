@@ -1,9 +1,10 @@
 extends Node2D
-class_name BaseWorld
+class_name BaseLevel
 
 signal player_dashed(cooldown : float)
-signal player_shoot
+signal player_shoot(ammo_remaining)
 signal player_weapon_changed(weapon_name : String, ammo : int, max_ammo : int)
+signal player_reached_exit
 
 @onready var pc_node = $CharacterContainer/PlayerCharacter
 @onready var character_container = $CharacterContainer
@@ -30,18 +31,18 @@ func spawn_projectile(projectile_scene : PackedScene, projectile_position : Vect
 func spawn_muzzle_flash(flash_position : Vector2):
 	var muzzle_flash_instance = muzzle_flash_scene.instantiate()
 	muzzle_flash_instance.position = flash_position
-	projectile_container.add_child(muzzle_flash_instance)
+	projectile_container.call_deferred("add_child", muzzle_flash_instance)
 
 func spawn_casing(casing_scene : PackedScene, casing_position : Vector2):
 	var casing_instance = casing_scene.instantiate()
 	casing_instance.position = casing_position
-	rubbish_container.add_child(casing_instance)
+	rubbish_container.call_deferred("add_child", casing_instance)
 
 func spawn_floating_text(text_position : Vector2, text_value : String):
 	var floating_text_instance = floating_text_scene.instantiate()
 	floating_text_instance.position = text_position
 	floating_text_instance.text = text_value
-	text_container.add_child(floating_text_instance)
+	text_container.call_deferred("add_child", floating_text_instance)
 
 func pc_shoots_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float, shot_data : ShotData):
 	spawn_projectile(projectile_scene, projectile_position, projectile_velocity, TeamConstants.Teams.PLAYER, damage, shot_data)
@@ -54,10 +55,10 @@ func _on_player_character_projectile_shot(projectile_scene : PackedScene, projec
 
 func _on_player_character_dash(cooldown):
 	emit_signal("player_dashed", cooldown)
-	
+
 func _on_player_character_weapon_changed(weapon_name, ammo, max_ammo):
 	emit_signal("player_weapon_changed", weapon_name, ammo, max_ammo)
-	
+
 func _on_player_character_casing_dropped(casing_scene, casing_position):
 	spawn_casing(casing_scene, casing_position)
 
@@ -98,6 +99,9 @@ func _ready():
 	_attach_enemy_signals()
 	_attach_spawners_signals()
 
+func _level_complete():
+	emit_signal("player_reached_exit")
 
-
-
+func _on_exit_area_2d_body_entered(body):
+	if body.is_in_group(TeamConstants.PLAYER_GROUP):
+		_level_complete()

@@ -1,10 +1,56 @@
 extends Control
 
-@onready var base_world_node = $SubViewportContainer/SubViewport/BaseWorld
+@onready var level_container_node = $SubViewportContainer/SubViewport
+
+@export var ordered_levels : Array[PackedScene] = []
 
 var crosshair_scene = preload("res://Assets/Sourced/Icons/crosshair.png")
 var time = [0,0,0] # H,M,S
 var can_cycle : bool = true
+var current_level : int = 0
+var current_level_node
+
+func _update_level_counter():
+	$LabelLevelCounter.text = "Level %d" % (current_level + 1)
+
+func _on_level_player_dashed(cooldown):
+	$DashCooldownIndicator.start(cooldown)
+	
+func _on_level_player_shoot():
+	$AmmoCounter.shoot()
+
+func _on_level_player_weapon_changed(weapon_name, ammo, max_ammo):
+	$AmmoCounter.current_ammo = ammo
+	$AmmoCounter.max_ammo = max_ammo
+
+func _clear_levels():
+	current_level_node = null
+	for level_instance in level_container_node.get_children():
+		level_instance.queue_free()
+
+func _load_level(level_scene : PackedScene):
+	_clear_levels()
+	var level_instance : BaseLevel = level_scene.instantiate()
+	level_container_node.call_deferred("add_child", level_instance)
+	level_instance.player_dashed.connect(_on_level_player_dashed)
+	level_instance.player_shoot.connect(_on_level_player_shoot)
+	level_instance.player_weapon_changed.connect(_on_level_player_weapon_changed)
+	level_instance.player_reached_exit.connect(_on_level_player_reached_exit)
+	current_level_node = level_instance
+
+func _load_current_level():
+	if ordered_levels.size() == 0:
+		return
+	if current_level >= ordered_levels.size():
+		current_level = 0
+	var level_scene : PackedScene = ordered_levels[current_level]
+	if level_scene != null:
+		_load_level(level_scene)
+
+func _on_level_player_reached_exit():
+	current_level += 1
+	_load_current_level()
+	_update_level_counter()
 
 func _on_mouse_entered():
 	Input.set_custom_mouse_cursor(crosshair_scene, Input.CURSOR_ARROW, Vector2(16, 16))
@@ -20,39 +66,24 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		var current_window = get_window()
 		var mouse_position = event.position - Vector2(current_window.content_scale_size / 2) 
-		base_world_node.set_pc_direction(mouse_position)
+		current_level_node.set_pc_direction(mouse_position)
 	elif event is InputEventMouseButton:
 		if event.is_action_pressed("shoot"):
-			base_world_node.set_pc_shooting(true)
+			current_level_node.set_pc_shooting(true)
 		elif event.is_action_released("shoot"):
-			base_world_node.set_pc_shooting(false)
+			current_level_node.set_pc_shooting(false)
 		elif event.is_action_pressed("dash"):
-			base_world_node.set_pc_dashing(true)
+			current_level_node.set_pc_dashing(true)
 		elif event.is_action_released("dash"):
-			base_world_node.set_pc_dashing(false)
+			current_level_node.set_pc_dashing(false)
 		elif event.is_action("cycle_next"):
 			if can_cycle:
-				base_world_node.set_pc_cycle_next()
+				current_level_node.set_pc_cycle_next()
 				_start_cycle_input_cooldown()
 		elif event.is_action("cycle_prev"):
 			if can_cycle:
-				base_world_node.set_pc_cycle_prev()
+				current_level_node.set_pc_cycle_prev()
 				_start_cycle_input_cooldown()
-			
-
-
-func _on_base_world_player_dashed(cooldown):
-	$DashCooldownIndicator.start(cooldown)
-
-
-func _on_base_world_player_shoot():
-	$AmmoCounter.shoot()
-
-
-func _on_base_world_player_weapon_changed(weapon_name, ammo, max_ammo):
-	$AmmoCounter.current_ammo = ammo
-	$AmmoCounter.max_ammo = max_ammo
-
 
 func _on_timer_timeout():
 	time[2] += 1
@@ -64,8 +95,8 @@ func _on_timer_timeout():
 			time[0]+=1
 	$LabelTime.text = "%02d:%02d:%02d" % time
 
-
 func _on_cycle_input_timer_timeout():
 	can_cycle = true
 
-
+func _ready():
+	_load_current_level()

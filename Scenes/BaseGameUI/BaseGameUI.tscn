@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2m6vj0fmbt5e"]
+[gd_scene load_steps=11 format=3 uid="uid://b2m6vj0fmbt5e"]
 
 [ext_resource type="Script" path="res://Scenes/BaseGameUI/BaseGameUI.gd" id="1_81gpw"]
-[ext_resource type="PackedScene" uid="uid://b8c3jkcbcvs5k" path="res://Scenes/BaseWorld/BaseWorld.tscn" id="1_uiw3u"]
+[ext_resource type="PackedScene" uid="uid://bhm44a1hxqdo4" path="res://Scenes/BaseLevel/Levels/LevelIntro.tscn" id="2_2pmlw"]
 [ext_resource type="PackedScene" uid="uid://erenao4flmuc" path="res://Scenes/BaseGameUI/cooldown_indcator.tscn" id="3_lg25r"]
+[ext_resource type="PackedScene" uid="uid://dqlqedbbyilwb" path="res://Scenes/BaseLevel/Levels/Level1.tscn" id="3_o4m4b"]
+[ext_resource type="PackedScene" uid="uid://d2b0746k2jh61" path="res://Scenes/BaseLevel/Levels/Level2.tscn" id="4_4fwkb"]
 [ext_resource type="PackedScene" uid="uid://oahehvtdu4x0" path="res://Scenes/BaseGameUI/ammo_counter.tscn" id="4_4sfmh"]
 [ext_resource type="PackedScene" uid="uid://c7i2wvfncmeuy" path="res://Scenes/BaseGameUI/controls.tscn" id="5_5d3nm"]
-[ext_resource type="PackedScene" uid="uid://bwobjfq04r045" path="res://Scenes/BaseGameUI/inventory_bar.tscn" id="6_ubliy"]
 
 [sub_resource type="Animation" id="Animation_vqbng"]
 length = 0.001
@@ -77,6 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_81gpw")
+ordered_levels = Array[PackedScene]([ExtResource("2_2pmlw"), ExtResource("3_o4m4b"), ExtResource("4_4fwkb")])
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -86,18 +88,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 4
+stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
-size = Vector2i(256, 150)
+size = Vector2i(512, 300)
 size_2d_override_stretch = true
 render_target_update_mode = 4
-
-[node name="BaseWorld" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_uiw3u")]
 
 [node name="DashCooldownIndicator" parent="." instance=ExtResource("3_lg25r")]
 layout_mode = 1
@@ -112,7 +112,7 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="AmmoCounter" parent="." instance=ExtResource("4_4sfmh")]
 layout_mode = 1
@@ -124,7 +124,7 @@ offset_top = -60.0
 offset_right = 60.0
 offset_bottom = -20.0
 grow_vertical = 0
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 modulate = Color(0.945098, 0.0196078, 0, 1)
@@ -137,7 +137,7 @@ offset_top = 20.0
 offset_right = -20.0
 offset_bottom = 47.0
 grow_horizontal = 0
-mouse_filter = 1
+mouse_filter = 2
 value = 80.0
 fill_mode = 1
 show_percentage = false
@@ -158,13 +158,6 @@ offset_right = 174.0
 offset_bottom = 46.0
 text = "00:00:00"
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
-[node name="CycleInputTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
 [node name="Controls" parent="." instance=ExtResource("5_5d3nm")]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -173,13 +166,20 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 840.0
-offset_top = 236.0
-offset_right = 1096.0
-offset_bottom = 364.0
+offset_left = -184.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = 64.0
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="CycleInputTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "controls_fade_out"
@@ -187,13 +187,7 @@ libraries = {
 "": SubResource("AnimationLibrary_r1bx4")
 }
 
-[node name="InventoryBar" parent="." instance=ExtResource("6_ubliy")]
-layout_mode = 0
-
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="player_dashed" from="SubViewportContainer/SubViewport/BaseWorld" to="." method="_on_base_world_player_dashed"]
-[connection signal="player_shoot" from="SubViewportContainer/SubViewport/BaseWorld" to="." method="_on_base_world_player_shoot"]
-[connection signal="player_weapon_changed" from="SubViewportContainer/SubViewport/BaseWorld" to="." method="_on_base_world_player_weapon_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="CycleInputTimer" to="." method="_on_cycle_input_timer_timeout"]

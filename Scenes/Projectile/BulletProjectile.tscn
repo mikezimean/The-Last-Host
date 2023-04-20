@@ -4,4 +4,5 @@
 [ext_resource type="Script" path="res://Scenes/Projectile/BulletProjectile.gd" id="2_o867i"]
 
 [node name="BulletProjectile" instance=ExtResource("1_y166o")]
+collision_mask = 2
 script = ExtResource("2_o867i")

@@ -47,4 +47,7 @@ func _on_body_collided(body_node):
 	_on_new_body_collided(body_node)
 
 func _on_body_entered(body):
-	_on_body_collided(body)
+	if body.is_in_group(TeamConstants.ENEMY_GROUP) or body.is_in_group(TeamConstants.PLAYER_GROUP):
+		_on_body_collided(body)
+	else:
+		_on_projectile_expired()
