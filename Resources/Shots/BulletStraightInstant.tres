@@ -8,3 +8,6 @@ script = ExtResource("1_h87xl")
 projectile_scene = ExtResource("1_n3de2")
 angle_offset = 0.0
 time_offset = 0.0
+penetration_count = 1
+penetration_loss_rate = 100.0
+consume_ammo = true

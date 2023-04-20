@@ -12,12 +12,18 @@ script = ExtResource("5_dlpjv")
 projectile_scene = ExtResource("2_ouo2s")
 angle_offset = 0.0
 time_offset = 0.1
+penetration_count = 1
+penetration_loss_rate = 100.0
+consume_ammo = true
 
 [sub_resource type="Resource" id="Resource_jh77w"]
 script = ExtResource("5_dlpjv")
 projectile_scene = ExtResource("2_ouo2s")
 angle_offset = 0.0
 time_offset = 0.2
+penetration_count = 1
+penetration_loss_rate = 100.0
+consume_ammo = true
 
 [resource]
 script = ExtResource("1_vpuqn")

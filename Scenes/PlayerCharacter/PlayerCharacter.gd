@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal projectile_shot(projectile_scene : PackedScene, projectile_position: Vector2, projectile_velocity: Vector2, projectile_damage : float)
+signal projectile_shot(projectile_scene : PackedScene, projectile_position: Vector2, projectile_velocity: Vector2, shot_data : ShotData)
 signal casing_dropped(casing_scene : PackedScene, casing_position : Vector2)
 signal dash(cooldown : float)
 signal weapon_changed(weapon_name : String, ammo : int, max_ammo : int)
@@ -122,12 +122,12 @@ func _on_cooldown_timer_timeout():
 func _on_dash_timer_timeout():
 	can_dash = true
 
-func _on_weapon_shot_projectile_shot(projectile_scene, angle_offset, consume_ammo):
+func _on_weapon_shot_projectile_shot(projectile_scene : PackedScene, shot_data : ShotData):
 	var current_weapon : WeaponData = get_current_weapon()
-	var projectile_vector = (facing_direction * current_weapon.projectile_speed).rotated(angle_offset)
+	var projectile_vector = (facing_direction * current_weapon.projectile_speed).rotated(shot_data.angle_offset)
 	var projectile_position = position + (facing_direction * (current_weapon.weapon_offset + current_weapon.barrel_offset))
-	emit_signal("projectile_shot", projectile_scene, projectile_position, projectile_vector, current_weapon.damage, consume_ammo)
-	if consume_ammo:
+	emit_signal("projectile_shot", projectile_scene, projectile_position, projectile_vector, current_weapon.damage, shot_data)
+	if shot_data.consume_ammo:
 		current_weapon.ammunition_count -= 1
 		await get_tree().create_timer(0.0167).timeout
 		var casing_position = position + (facing_direction * current_weapon.weapon_offset)

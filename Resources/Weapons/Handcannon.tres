@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c1cnrscwif61w" path="res://Scenes/Casing/BulletCasing.tscn" id="1_ivtwd"]
 [ext_resource type="Script" path="res://Resources/WeaponData.gd" id="3_16e47"]
-[ext_resource type="Texture2D" uid="uid://llqy01mj2xr8" path="res://Assets/Originals/Sprite/Hand_Cannon_7.png" id="4_48ki0"]
+[ext_resource type="Texture2D" uid="uid://cvdfyoufex2cn" path="res://Assets/Originals/Sprite/Hand_Cannon_7.png" id="4_48ki0"]
 [ext_resource type="Resource" uid="uid://knhhd188k6hs" path="res://Resources/Shots/BulletStraightInstant.tres" id="4_n7nl7"]
 
 [resource]

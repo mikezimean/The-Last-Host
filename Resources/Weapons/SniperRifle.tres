@@ -1,9 +1,19 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://khgrgseocoeh"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=7 format=3 uid="uid://khgrgseocoeh"]
 
 [ext_resource type="PackedScene" uid="uid://c1cnrscwif61w" path="res://Scenes/Casing/BulletCasing.tscn" id="1_etg7c"]
 [ext_resource type="Script" path="res://Resources/WeaponData.gd" id="1_tdlss"]
-[ext_resource type="Resource" uid="uid://knhhd188k6hs" path="res://Resources/Shots/BulletStraightInstant.tres" id="4_mf3ua"]
-[ext_resource type="Texture2D" uid="uid://c7o76hufcvd4a" path="res://Assets/Originals/Sprite/Sniper_12.png" id="4_vhojf"]
+[ext_resource type="PackedScene" uid="uid://556mg5gd3b31" path="res://Scenes/Projectile/BulletProjectile.tscn" id="3_2n35i"]
+[ext_resource type="Script" path="res://Resources/ShotData.gd" id="4_65te5"]
+[ext_resource type="Texture2D" uid="uid://dk75gnyxo0owx" path="res://Assets/Originals/Sprite/Sniper_12.png" id="4_vhojf"]
+
+[sub_resource type="Resource" id="Resource_oenvf"]
+script = ExtResource("4_65te5")
+projectile_scene = ExtResource("3_2n35i")
+angle_offset = 0.0
+time_offset = 0.0
+penetration_count = 3
+penetration_loss_rate = 50.0
+consume_ammo = true
 
 [resource]
 script = ExtResource("1_tdlss")
@@ -18,4 +28,4 @@ cooldown = 1.0
 damage = 30
 max_ammunition = 50
 casing_scene = ExtResource("1_etg7c")
-shots = Array[Resource("res://Resources/ShotData.gd")]([ExtResource("4_mf3ua")])
+shots = Array[ExtResource("4_65te5")]([SubResource("Resource_oenvf")])
