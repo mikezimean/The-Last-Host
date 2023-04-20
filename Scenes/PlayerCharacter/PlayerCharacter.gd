@@ -4,6 +4,7 @@ signal projectile_shot(projectile_scene : PackedScene, projectile_position: Vect
 signal casing_dropped(casing_scene : PackedScene, casing_position : Vector2)
 signal dash(cooldown : float)
 signal weapon_changed(weapon_name : String, ammo : int, max_ammo : int)
+signal new_weapon(weapon_name : String)
 
 @export var acceleration : float = 600
 @export var max_speed : float = 125
@@ -39,7 +40,7 @@ func _update_weapon_sprite():
 		$CooldownTimer.start(current_weapon.remaining_cooldown)
 	else:
 		can_shoot = true
-	emit_signal("weapon_changed", current_weapon.name, current_weapon.ammunition_count, current_weapon.max_ammunition)
+	emit_signal("weapon_changed", current_weapon.name, current_weapon.ammunition_count, current_weapon.max_ammunition, current_weapon_iter)
 
 func pickup_item(item):
 	if item is WeaponData:
@@ -47,6 +48,7 @@ func pickup_item(item):
 		get_current_weapon().remaining_cooldown = $CooldownTimer.time_left
 		$CooldownTimer.stop()
 		weapons.append(item)
+		emit_signal("new_weapon", item.name)
 		current_weapon_iter = weapons.size() -1
 		_update_weapon_sprite()
 

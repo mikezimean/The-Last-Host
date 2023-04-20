@@ -19,9 +19,13 @@ func _on_level_player_dashed(cooldown):
 func _on_level_player_shoot():
 	$AmmoCounter.shoot()
 
-func _on_level_player_weapon_changed(weapon_name, ammo, max_ammo):
+func _on_level_player_weapon_changed(weapon_name, ammo, max_ammo, index):
 	$AmmoCounter.current_ammo = ammo
 	$AmmoCounter.max_ammo = max_ammo
+	$InventoryBar.select_slot(index)
+
+func _on_level_player_new_weapon(weapon_name : String):
+	$InventoryBar.activate_new_slot(weapon_name)
 
 func _clear_levels():
 	current_level_node = null
@@ -35,6 +39,7 @@ func _load_level(level_scene : PackedScene):
 	level_instance.player_dashed.connect(_on_level_player_dashed)
 	level_instance.player_shoot.connect(_on_level_player_shoot)
 	level_instance.player_weapon_changed.connect(_on_level_player_weapon_changed)
+	level_instance.player_new_weapon.connect(_on_level_player_new_weapon)
 	level_instance.player_reached_exit.connect(_on_level_player_reached_exit)
 	current_level_node = level_instance
 

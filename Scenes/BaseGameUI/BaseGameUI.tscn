@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2m6vj0fmbt5e"]
+[gd_scene load_steps=12 format=3 uid="uid://b2m6vj0fmbt5e"]
 
 [ext_resource type="Script" path="res://Scenes/BaseGameUI/BaseGameUI.gd" id="1_81gpw"]
 [ext_resource type="PackedScene" uid="uid://bhm44a1hxqdo4" path="res://Scenes/BaseLevel/Levels/LevelIntro.tscn" id="2_2pmlw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d2b0746k2jh61" path="res://Scenes/BaseLevel/Levels/Level2.tscn" id="4_4fwkb"]
 [ext_resource type="PackedScene" uid="uid://oahehvtdu4x0" path="res://Scenes/BaseGameUI/ammo_counter.tscn" id="4_4sfmh"]
 [ext_resource type="PackedScene" uid="uid://c7i2wvfncmeuy" path="res://Scenes/BaseGameUI/controls.tscn" id="5_5d3nm"]
+[ext_resource type="PackedScene" uid="uid://bwobjfq04r045" path="res://Scenes/BaseGameUI/inventory_bar.tscn" id="8_1jloo"]
 
 [sub_resource type="Animation" id="Animation_vqbng"]
 length = 0.001
@@ -166,13 +167,27 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -184.0
-offset_top = -64.0
-offset_right = 72.0
-offset_bottom = 64.0
+offset_left = 840.0
+offset_top = 236.0
+offset_right = 1096.0
+offset_bottom = 364.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="InventoryBar" parent="." instance=ExtResource("8_1jloo")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -84.0
+offset_right = 190.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

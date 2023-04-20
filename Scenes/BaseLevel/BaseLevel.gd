@@ -3,7 +3,8 @@ class_name BaseLevel
 
 signal player_dashed(cooldown : float)
 signal player_shoot(ammo_remaining)
-signal player_weapon_changed(weapon_name : String, ammo : int, max_ammo : int)
+signal player_weapon_changed(weapon_name : String, ammo : int, max_ammo : int, index : int)
+signal player_new_weapon(weapon_name : String)
 signal player_reached_exit
 
 @onready var pc_node = $CharacterContainer/PlayerCharacter
@@ -56,8 +57,8 @@ func _on_player_character_projectile_shot(projectile_scene : PackedScene, projec
 func _on_player_character_dash(cooldown):
 	emit_signal("player_dashed", cooldown)
 
-func _on_player_character_weapon_changed(weapon_name, ammo, max_ammo):
-	emit_signal("player_weapon_changed", weapon_name, ammo, max_ammo)
+func _on_player_character_weapon_changed(weapon_name, ammo, max_ammo, index):
+	emit_signal("player_weapon_changed", weapon_name, ammo, max_ammo, index)
 
 func _on_player_character_casing_dropped(casing_scene, casing_position):
 	spawn_casing(casing_scene, casing_position)
@@ -105,3 +106,6 @@ func _level_complete():
 func _on_exit_area_2d_body_entered(body):
 	if body.is_in_group(TeamConstants.PLAYER_GROUP):
 		_level_complete()
+
+func _on_player_character_new_weapon(weapon_name):
+	emit_signal("player_new_weapon", weapon_name)
