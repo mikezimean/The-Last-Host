@@ -20,5 +20,5 @@ func _on_player_detection_area_body_exited(body):
 
 
 func _on_picked_up_area_body_entered(body):
-	print("picked up")
+	pass
 	# the item get picked up by the player, queue_free(), sfx, etc should go there

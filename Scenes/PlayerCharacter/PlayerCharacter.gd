@@ -41,6 +41,15 @@ func _update_weapon_sprite():
 		can_shoot = true
 	emit_signal("weapon_changed", current_weapon.name, current_weapon.ammunition_count, current_weapon.max_ammunition)
 
+func pickup_item(item):
+	if item is WeaponData:
+		item.ammunition_count = item.max_ammunition
+		get_current_weapon().remaining_cooldown = $CooldownTimer.time_left
+		$CooldownTimer.stop()
+		weapons.append(item)
+		current_weapon_iter = weapons.size() -1
+		_update_weapon_sprite()
+
 func cycle_next():
 	get_current_weapon().remaining_cooldown = $CooldownTimer.time_left
 	$CooldownTimer.stop()

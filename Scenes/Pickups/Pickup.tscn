@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgiujpubd1qar"]
+[gd_scene load_steps=5 format=3 uid="uid://bgiujpubd1qar"]
 
 [ext_resource type="Script" path="res://Scenes/Pickups/Pickup.gd" id="1_t6s7v"]
-[ext_resource type="Texture2D" uid="uid://cijatqvdkcin7" path="res://icon.svg" id="2_mqje3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_be53y"]
 radius = 5.0
@@ -18,10 +17,6 @@ collision_layer = 0
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_t6s7v")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.077, 0.077)
-texture = ExtResource("2_mqje3")
 
 [node name="PickedUpArea" type="Area2D" parent="."]
 editor_description = "This area define the range where the player should be to pick up the item"
