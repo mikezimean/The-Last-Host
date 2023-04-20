@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwobjfq04r045"]
+
+[ext_resource type="PackedScene" uid="uid://c1fi6blxu8tf3" path="res://Scenes/BaseGameUI/weapon_slot.tscn" id="1_c1b3o"]
+
+[node name="InventoryBar" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WeaponSlot" parent="." instance=ExtResource("1_c1b3o")]
+layout_mode = 2
