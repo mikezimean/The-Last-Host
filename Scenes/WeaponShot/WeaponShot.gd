@@ -1,9 +1,9 @@
 extends Node2D
 
-signal projectile_shot(projectile_scene : PackedScene, angle_offset: float)
+signal projectile_shot(projectile_scene : PackedScene, shot_data : ShotData) #angle_offset: float, consume_ammo : bool)
 
 func _shoot_angled_shot(shot_data : ShotData):
-	emit_signal("projectile_shot", shot_data.projectile_scene, shot_data.angle_offset)
+	emit_signal("projectile_shot", shot_data.projectile_scene, shot_data)
 
 func _shoot_single_shot(shot_data : ShotData):
 	var timer_node

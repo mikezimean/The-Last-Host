@@ -8,6 +8,10 @@ var velocity : Vector2
 var time_since_spawn : float = 0
 var collided_bodies : Array = []
 
+# will be set by world when instantiate but unsued for this type of projectile
+var penetration_count = 999
+var penetration_loss_rate = 0
+
 func _calculate_initial_force():
 	var force : Vector2 = velocity * mass * velocity_mod
 	rotation = velocity.angle()

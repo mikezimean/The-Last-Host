@@ -10,5 +10,9 @@ class_name WeaponData
 @export_range(0, 1200) var projectile_speed : float
 @export_range(0, 120) var cooldown : float
 @export_range(0, 9999) var damage : int
+@export_range(0,999) var max_ammunition : int
 @export var casing_scene : PackedScene
 @export var shots : Array[ShotData]
+
+var ammunition_count : int
+var remaining_cooldown : float = 0.0

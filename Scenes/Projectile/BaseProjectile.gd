@@ -7,6 +7,10 @@ var velocity : Vector2
 var time_since_spawn : float = 0
 var collided_bodies : Array = []
 
+# will be set by world when instanciated from shot_data
+var penetration_count = 1
+var penetration_loss_rate = 100
+
 func _physics_process(delta):
 	time_since_spawn += delta
 	position += velocity * delta

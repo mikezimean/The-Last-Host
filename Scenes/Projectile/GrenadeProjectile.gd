@@ -5,7 +5,7 @@ signal spawned_projectile(projectile_scene : PackedScene, projectile_position : 
 @export var explosion_scene : PackedScene
 
 func _detonate():
-	emit_signal("spawned_projectile", explosion_scene, position, Vector2.ZERO, team, damage)
+	emit_signal("spawned_projectile", explosion_scene, position, Vector2.ZERO, team, damage, null)
 	queue_free()
 
 func _on_projectile_expired():
