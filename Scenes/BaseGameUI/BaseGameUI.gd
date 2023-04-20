@@ -27,6 +27,7 @@ func _on_level_player_weapon_changed(weapon_name, ammo, max_ammo):
 
 func _on_level_wardrobe_access_changed(has_access_flag : bool):
 	has_wardrobe_access = has_access_flag
+	$InteractInstructions.visible = has_wardrobe_access
 
 func _open_wardrobe():
 	%WardrobePanelContainer.show()
