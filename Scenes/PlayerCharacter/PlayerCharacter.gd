@@ -98,13 +98,9 @@ func shoot():
 	if is_shooting and can_shoot:
 		var current_weapon : WeaponData = get_current_weapon()
 		if current_weapon.ammunition_count < 1: return
-		var projectile_vector = facing_direction * current_weapon.projectile_speed
-		var casing_position = position + (facing_direction * current_weapon.weapon_offset)
 		$WeaponShot.shoot(current_weapon.shots)
-		
 		can_shoot = false
 		$CooldownTimer.start(current_weapon.cooldown)
-		
 
 func _physics_process(delta):
 	move_state(delta)

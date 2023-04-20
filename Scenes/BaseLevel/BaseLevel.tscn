@@ -58,6 +58,8 @@ y_sort_enabled = true
 [node name="PlayerCharacter" parent="CharacterContainer" instance=ExtResource("4_75cy1")]
 position = Vector2(64, 64)
 
+[node name="InteractablesContainer" type="Node2D" parent="."]
+
 [node name="ProjectileContainer" type="Node2D" parent="."]
 y_sort_enabled = true
 

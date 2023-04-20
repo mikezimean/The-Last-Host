@@ -5,6 +5,7 @@ signal player_dashed(cooldown : float)
 signal player_shoot(ammo_remaining)
 signal player_weapon_changed(weapon_name : String, ammo : int, max_ammo : int)
 signal player_reached_exit
+signal wardrobe_access_changed(has_access_flag : bool)
 
 @onready var pc_node = $CharacterContainer/PlayerCharacter
 @onready var character_container = $CharacterContainer
@@ -62,6 +63,9 @@ func _on_player_character_weapon_changed(weapon_name, ammo, max_ammo):
 func _on_player_character_casing_dropped(casing_scene, casing_position):
 	spawn_casing(casing_scene, casing_position)
 
+func _on_wardrobe_access_changed(has_access_flag : bool):
+	emit_signal("wardrobe_access_changed", has_access_flag)
+
 func set_pc_shooting(shooting_flag : bool = true):
 	pc_node.is_shooting = shooting_flag
 
@@ -95,9 +99,15 @@ func _attach_spawners_signals():
 	for child in $SpawnerContainer.get_children():
 		child.spawn_enemy.connect(_on_spawner_spawn_enemy)
 
+func _attach_wardrobe_signals():
+	for child in $InteractablesContainer.get_children():
+		if child is Wardrobe:
+			child.wardrobe_access_changed.connect(_on_wardrobe_access_changed)
+
 func _ready():
 	_attach_enemy_signals()
 	_attach_spawners_signals()
+	_attach_wardrobe_signals()
 
 func _level_complete():
 	emit_signal("player_reached_exit")
@@ -105,3 +115,6 @@ func _level_complete():
 func _on_exit_area_2d_body_entered(body):
 	if body.is_in_group(TeamConstants.PLAYER_GROUP):
 		_level_complete()
+
+func _on_wardrobe_wardrobe_access_changed(has_access_flag):
+	emit_signal("wardrobe_access_changed", has_access_flag)
