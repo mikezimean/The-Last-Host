@@ -81,4 +81,5 @@ shape = SubResource("RectangleShape2D_lxyqs")
 [connection signal="casing_dropped" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_casing_dropped"]
 [connection signal="dash" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_dash"]
 [connection signal="projectile_shot" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_projectile_shot"]
+[connection signal="weapon_changed" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_weapon_changed"]
 [connection signal="body_entered" from="ExitArea2D" to="." method="_on_exit_area_2d_body_entered"]

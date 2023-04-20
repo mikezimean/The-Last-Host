@@ -3,6 +3,8 @@ class_name BaseLevel
 
 signal player_dashed(cooldown : float)
 signal player_shoot(ammo_remaining)
+signal player_weapon_changed(weapon_name : String, ammo : int, max_ammo : int)
+signal player_reached_exit
 
 @onready var pc_node = $CharacterContainer/PlayerCharacter
 @onready var character_container = $CharacterContainer
@@ -13,12 +15,15 @@ signal player_shoot(ammo_remaining)
 var muzzle_flash_scene = preload("res://Scenes/MuzzleFlash/MuzzleFlash.tscn")
 var floating_text_scene = preload("res://Scenes/FloatingText/FloatingText2D.tscn")
 
-func spawn_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, team : TeamConstants.Teams, damage : float):
+func spawn_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, team : TeamConstants.Teams, damage : float, shot_data : ShotData):
 	var projectile_instance = projectile_scene.instantiate()
 	projectile_instance.position = projectile_position
 	projectile_instance.velocity = projectile_velocity
 	projectile_instance.damage = damage
 	projectile_instance.team = team
+	if shot_data: # can be null if grenade projectile want to spawn an explosion
+		projectile_instance.penetration_count = shot_data.penetration_count
+		projectile_instance.penetration_loss_rate = shot_data.penetration_loss_rate
 	if projectile_instance.has_signal("spawned_projectile"):
 		projectile_instance.spawned_projectile.connect(spawn_projectile)
 	projectile_container.call_deferred("add_child", projectile_instance)
@@ -39,17 +44,21 @@ func spawn_floating_text(text_position : Vector2, text_value : String):
 	floating_text_instance.text = text_value
 	text_container.add_child(floating_text_instance)
 
-func pc_shoots_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float):
-	spawn_projectile(projectile_scene, projectile_position, projectile_velocity, TeamConstants.Teams.PLAYER, damage)
+func pc_shoots_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float, shot_data : ShotData):
+	spawn_projectile(projectile_scene, projectile_position, projectile_velocity, TeamConstants.Teams.PLAYER, damage, shot_data)
 	spawn_muzzle_flash(projectile_position)
-	emit_signal("player_shoot", 0) # ammo not handled for now
+	if shot_data.consume_ammo: # the signal is catched by the UI to update the ammo counter
+		emit_signal("player_shoot")
 
-func _on_player_character_projectile_shot(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float):
-	pc_shoots_projectile(projectile_scene, projectile_position, projectile_velocity, damage)
+func _on_player_character_projectile_shot(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, damage : float, shot_data : ShotData):
+	pc_shoots_projectile(projectile_scene, projectile_position, projectile_velocity, damage, shot_data)
 
 func _on_player_character_dash(cooldown):
 	emit_signal("player_dashed", cooldown)
-	
+
+func _on_player_character_weapon_changed(weapon_name, ammo, max_ammo):
+	emit_signal("player_weapon_changed", weapon_name, ammo, max_ammo)
+
 func _on_player_character_casing_dropped(casing_scene, casing_position):
 	spawn_casing(casing_scene, casing_position)
 
@@ -90,10 +99,8 @@ func _ready():
 	_attach_enemy_signals()
 	_attach_spawners_signals()
 
-
 func _level_complete():
-	print("level complete")
-	pass
+	emit_signal("player_reached_exit")
 
 func _on_exit_area_2d_body_entered(body):
 	if body.is_in_group(TeamConstants.PLAYER_GROUP):
