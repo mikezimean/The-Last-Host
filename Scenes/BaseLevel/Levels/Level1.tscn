@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cjpv7pmyt7546" path="res://Scenes/EnemyCharacter/EnemyCharacter.tscn" id="3_cdrjc"]
 [ext_resource type="PackedScene" uid="uid://bpu5m7vuunslf" path="res://Scenes/WeaponPickup/WeaponPickup.tscn" id="4_uqgda"]
 [ext_resource type="Resource" uid="uid://djuphlvsh1v71" path="res://Resources/Weapons/Rifle.tres" id="5_k06k5"]
-[ext_resource type="AudioStream" uid="uid://dsfhxwskbucf4" path="res://Assets/Originals/Music/Godot_56_-_The_Last_Host_-_Music_-_Track1.ogg" id="6_04ofl"]
+[ext_resource type="AudioStream" uid="uid://6w7hro2oc7s2" path="res://Assets/Originals/Music/Godot_56_-_The_Last_Host_-_Music_-_Track1.ogg" id="6_04ofl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vemc"]
 size = Vector2(105, 20)

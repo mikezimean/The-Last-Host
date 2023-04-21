@@ -1,19 +1,19 @@
 [gd_scene load_steps=22 format=3 uid="uid://cjpv7pmyt7546"]
 
 [ext_resource type="Script" path="res://Scenes/EnemyCharacter/EnemyCharacter.gd" id="1_ckq15"]
-[ext_resource type="Texture2D" uid="uid://b45vjjguxj2i" path="res://Assets/Originals/Sprite/characters_concept.png" id="1_j6xe7"]
-[ext_resource type="AudioStream" uid="uid://nkmwyn8bmdt4" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_1.ogg" id="3_fjgx0"]
-[ext_resource type="AudioStream" uid="uid://cy1nh6wru5xrn" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_2.ogg" id="4_34wpj"]
-[ext_resource type="AudioStream" uid="uid://dqjyny50r8wpd" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_3.ogg" id="5_vk1ck"]
-[ext_resource type="AudioStream" uid="uid://cu4swn21m6yfa" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_4.ogg" id="6_3sawx"]
-[ext_resource type="AudioStream" uid="uid://bbirtv0882cj0" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_5.ogg" id="7_25m8k"]
-[ext_resource type="AudioStream" uid="uid://dbv7unephe11u" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_6.ogg" id="8_40xre"]
-[ext_resource type="AudioStream" uid="uid://ct4m8xep3obuk" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_7.ogg" id="9_eiffr"]
-[ext_resource type="AudioStream" uid="uid://bkcs1lgy8lr8l" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_8.ogg" id="10_fxtp2"]
-[ext_resource type="AudioStream" uid="uid://duxecn0hk3v2u" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_1.ogg" id="11_0wvx4"]
-[ext_resource type="AudioStream" uid="uid://cesn7buxvolkc" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_2.ogg" id="12_hvnva"]
-[ext_resource type="AudioStream" uid="uid://bj6qk5ddxvdjb" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_3.ogg" id="13_5p8mg"]
-[ext_resource type="AudioStream" uid="uid://hp68npcfh7w7" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_4.ogg" id="14_4hddb"]
+[ext_resource type="Texture2D" uid="uid://cummy74w4urlk" path="res://Assets/Originals/Sprite/characters_concept.png" id="1_j6xe7"]
+[ext_resource type="AudioStream" uid="uid://c66p3c7rpf5vl" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_1.ogg" id="3_fjgx0"]
+[ext_resource type="AudioStream" uid="uid://cwgmhv0nrflnw" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_2.ogg" id="4_34wpj"]
+[ext_resource type="AudioStream" uid="uid://bdge5kvvnu63k" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_3.ogg" id="5_vk1ck"]
+[ext_resource type="AudioStream" uid="uid://ly5as6ctlkru" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_4.ogg" id="6_3sawx"]
+[ext_resource type="AudioStream" uid="uid://dle4blej6v3dk" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_5.ogg" id="7_25m8k"]
+[ext_resource type="AudioStream" uid="uid://cbwuurs0x1thb" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_6.ogg" id="8_40xre"]
+[ext_resource type="AudioStream" uid="uid://d0sifb4twjmaq" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_7.ogg" id="9_eiffr"]
+[ext_resource type="AudioStream" uid="uid://dms7ii558qiy8" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_8.ogg" id="10_fxtp2"]
+[ext_resource type="AudioStream" uid="uid://dn7rcw7dokmoo" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_1.ogg" id="11_0wvx4"]
+[ext_resource type="AudioStream" uid="uid://dir8q462uxbj7" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_2.ogg" id="12_hvnva"]
+[ext_resource type="AudioStream" uid="uid://efmsrvx5e7ah" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_3.ogg" id="13_5p8mg"]
+[ext_resource type="AudioStream" uid="uid://cpcqlix8qphfk" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_4.ogg" id="14_4hddb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3s8qn"]
 
@@ -124,10 +124,12 @@ libraries = {
 
 [node name="HitStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_bhyy0")
+volume_db = 12.0
 bus = &"SFX"
 
 [node name="DeathStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_r0cfp")
+volume_db = 12.0
 bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bvwl11s2p0hd" path="res://Scenes/OptionsMenu/MasterOptionsMenu.tscn" id="3"]
 [ext_resource type="Theme" path="res://Themes/MainMenuTheme.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://doj1dmgtf0a71" path="res://Scenes/UI/SoundButton/SoundButton.tscn" id="5"]
-[ext_resource type="AudioStream" uid="uid://c1w8llnpjqyyr" path="res://Assets/Originals/Music/Godot_56_-_The_Last_Host_-_Music_-_MenuDemo1.ogg" id="7_aekgg"]
+[ext_resource type="AudioStream" uid="uid://dtqpw2qo8bkv8" path="res://Assets/Originals/Music/Godot 56 - The Last Host - Music - MenuMusic.ogg" id="7_eaa6t"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://Scenes/Credits/Credits.tscn" id="8"]
 
 [sub_resource type="Animation" id="5"]
@@ -434,7 +434,8 @@ offset_right = 62.0
 text = "Back"
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_aekgg")
+stream = ExtResource("7_eaa6t")
+volume_db = -10.0
 autoplay = true
 bus = &"Music"
 
