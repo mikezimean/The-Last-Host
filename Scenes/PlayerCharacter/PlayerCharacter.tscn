@@ -612,10 +612,12 @@ one_shot = true
 
 [node name="WalkingStreamRepeater2D" parent="." instance=ExtResource("18_vwqfm")]
 stream = SubResource("AudioStreamRandomizer_tuxxo")
+bus = &"SFX"
 repeat_delay = 0.6
 
 [node name="DashingStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_jq4kj")
+bus = &"SFX"
 
 [connection signal="projectile_shot" from="WeaponShot" to="." method="_on_weapon_shot_projectile_shot"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
