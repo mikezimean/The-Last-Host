@@ -8,15 +8,38 @@ signal player_new_weapon(weapon_name : String)
 signal player_reached_exit
 signal wardrobe_access_changed(has_access_flag : bool)
 
-@onready var pc_node = $CharacterContainer/PlayerCharacter
 @onready var character_container = $CharacterContainer
 @onready var projectile_container = $ProjectileContainer
 @onready var rubbish_container = $RubbishContainer
 @onready var collectible_container = $CollectibleContainer
 @onready var text_container = $TextContainer
+var pc_node
 var muzzle_flash_scene = preload("res://Scenes/MuzzleFlash/MuzzleFlash.tscn")
 var floating_text_scene = preload("res://Scenes/FloatingText/FloatingText2D.tscn")
 var current_outfit
+var can_exit = false
+
+func add_player(player):
+	pc_node = player
+	pc_node.projectile_shot.connect(_on_player_character_projectile_shot)
+	pc_node.casing_dropped.connect(_on_player_character_casing_dropped)
+	pc_node.dash.connect(_on_player_character_dash)
+	pc_node.weapon_changed.connect(_on_player_character_weapon_changed)
+	pc_node.new_weapon.connect(_on_player_character_new_weapon)
+	pc_node.ready.connect(_on_player_ready)
+	
+	pc_node.position = $PlayerSpawnPoint.position
+	$CharacterContainer.add_child(pc_node)
+
+func remove_player():
+	pc_node = pc_node as CharacterBody2D
+	$CharacterContainer.remove_child(pc_node)
+	pc_node = null
+
+func _on_player_ready():
+	set_pc_direction(Vector2(1,0))
+	if current_outfit:
+		set_pc_outfit(current_outfit)
 
 func spawn_projectile(projectile_scene : PackedScene, projectile_position : Vector2, projectile_velocity : Vector2, team : TeamConstants.Teams, damage : float, shot_data : ShotData):
 	var projectile_instance = projectile_scene.instantiate()
@@ -116,15 +139,12 @@ func _ready():
 	_attach_enemy_signals()
 	_attach_spawners_signals()
 	_attach_wardrobe_signals()
-	set_pc_direction(Vector2(1,0))
-	if current_outfit:
-		set_pc_outfit(current_outfit)
 
 func _level_complete():
 	emit_signal("player_reached_exit")
 
 func _on_exit_area_2d_body_entered(body):
-	if body.is_in_group(TeamConstants.PLAYER_GROUP):
+	if body.is_in_group(TeamConstants.PLAYER_GROUP) and can_exit:
 		_level_complete()
 
 func _on_player_character_new_weapon(weapon_name):
@@ -132,3 +152,9 @@ func _on_player_character_new_weapon(weapon_name):
 
 func _on_wardrobe_wardrobe_access_changed(has_access_flag):
 	emit_signal("wardrobe_access_changed", has_access_flag)
+
+# the purpose of this thing is to fix a bug in the engine -> the player is somewhat detect in the exit area on startup of the level
+# while it is not, thus triggering the level_complete and skipping this level
+# whith this timer i can skip the early collisions detection in _on_exit_area_2d_body_entered
+func _on_can_exit_timer_timeout():
+	can_exit = true

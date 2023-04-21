@@ -5,6 +5,8 @@ extends Control
 @export var ordered_levels : Array[PackedScene] = []
 
 var crosshair_scene = preload("res://Assets/Sourced/Icons/crosshair.png")
+var player_scene = preload("res://Scenes/PlayerCharacter/PlayerCharacter.tscn")
+var player : CharacterBody2D
 var time = [0,0,0] # H,M,S
 var can_cycle : bool = true
 var current_level : int = 0
@@ -40,23 +42,23 @@ func _close_wardrobe():
 	%WardrobePanelContainer.hide()
 
 func _clear_levels():
-	current_level_node = null
-	for level_instance in level_container_node.get_children():
-		level_instance.queue_free()
+	if current_level_node:
+		current_level_node.remove_player()
+		current_level_node.free()
+		current_level_node = null
 
 func _load_level(level_scene : PackedScene):
 	_clear_levels()
 	var level_instance : BaseLevel = level_scene.instantiate()
-	level_container_node.call_deferred("add_child", level_instance)
+	current_level_node = level_instance
+	level_instance.ready.connect(_on_level_ready)
+	level_container_node.add_child(level_instance)
 	level_instance.player_dashed.connect(_on_level_player_dashed)
 	level_instance.player_shoot.connect(_on_level_player_shoot)
 	level_instance.player_weapon_changed.connect(_on_level_player_weapon_changed)
 	level_instance.player_new_weapon.connect(_on_level_player_new_weapon)
 	level_instance.player_reached_exit.connect(_on_level_player_reached_exit)
 	level_instance.wardrobe_access_changed.connect(_on_level_wardrobe_access_changed)
-	if current_outfit: 
-		level_instance.set_pc_outfit(current_outfit)
-	current_level_node = level_instance
 
 func _load_current_level():
 	if ordered_levels.size() == 0:
@@ -65,7 +67,10 @@ func _load_current_level():
 		current_level = 0
 	var level_scene : PackedScene = ordered_levels[current_level]
 	if level_scene != null:
-		_load_level(level_scene)
+		call_deferred("_load_level", level_scene)
+
+func _on_level_ready():
+	current_level_node.add_player(player)
 
 func _on_level_player_reached_exit():
 	current_level += 1
@@ -125,6 +130,7 @@ func _on_cycle_input_timer_timeout():
 	can_cycle = true
 
 func _ready():
+	player = player_scene.instantiate()
 	_load_current_level()
 
 func _on_wardrobe_panel_container_outfit_changed(sprite_stack):
