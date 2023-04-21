@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://hji8le5si4gx"]
+[gd_scene load_steps=51 format=3 uid="uid://hji8le5si4gx"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerCharacter/PlayerCharacter.gd" id="1_8numc"]
 [ext_resource type="Resource" uid="uid://0ubbegprkhdp" path="res://Resources/Weapons/Handcannon.tres" id="2_vwjhq"]
@@ -18,6 +18,10 @@
 [ext_resource type="AudioStream" uid="uid://c6ci6ibyukqre" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_3.ogg" id="16_avha5"]
 [ext_resource type="AudioStream" uid="uid://hjbgy0am1580" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_4.ogg" id="17_n52v5"]
 [ext_resource type="PackedScene" uid="uid://33tu2t66ifbo" path="res://Scenes/StreamRepeater/StreamRepeater2D.tscn" id="18_vwqfm"]
+[ext_resource type="AudioStream" uid="uid://di543bfnquqlw" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing1.ogg" id="19_oj45g"]
+[ext_resource type="AudioStream" uid="uid://1a5iqn4ln2ke" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing2.ogg" id="20_v1pyo"]
+[ext_resource type="AudioStream" uid="uid://c1qqvbkgs0m3h" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing3.ogg" id="21_55lcn"]
+[ext_resource type="AudioStream" uid="uid://nefxh33w7hxv" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing4.ogg" id="22_7lwj4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ox0bi"]
 radius = 5.0
@@ -504,6 +508,17 @@ stream_6/weight = 1.0
 stream_7/stream = ExtResource("17_n52v5")
 stream_7/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jq4kj"]
+streams_count = 4
+stream_0/stream = ExtResource("19_oj45g")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("20_v1pyo")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("21_55lcn")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("22_7lwj4")
+stream_3/weight = 1.0
+
 [node name="PlayerCharacter" type="CharacterBody2D" groups=["player"]]
 collision_layer = 5
 collision_mask = 3
@@ -598,6 +613,9 @@ one_shot = true
 [node name="WalkingStreamRepeater2D" parent="." instance=ExtResource("18_vwqfm")]
 stream = SubResource("AudioStreamRandomizer_tuxxo")
 repeat_delay = 0.6
+
+[node name="DashingStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_jq4kj")
 
 [connection signal="projectile_shot" from="WeaponShot" to="." method="_on_weapon_shot_projectile_shot"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

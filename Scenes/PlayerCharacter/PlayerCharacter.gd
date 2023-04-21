@@ -99,6 +99,7 @@ func move_state(delta):
 		$WalkingStreamRepeater2D.play_loop()
 		if is_dashing and can_dash:
 			velocity = input_vector * dash_speed
+			$DashingStreamPlayer2D.play()
 			can_dash = false
 			$DashTimer.start()
 			emit_signal("dash", $DashTimer.wait_time)
