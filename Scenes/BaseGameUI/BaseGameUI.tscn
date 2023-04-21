@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2m6vj0fmbt5e"]
+[gd_scene load_steps=18 format=3 uid="uid://b2m6vj0fmbt5e"]
 
 [ext_resource type="Script" path="res://Scenes/BaseGameUI/BaseGameUI.gd" id="1_81gpw"]
 [ext_resource type="PackedScene" uid="uid://bhm44a1hxqdo4" path="res://Scenes/BaseLevel/Levels/LevelIntro.tscn" id="2_2pmlw"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://c8eqecqf48uv6" path="res://Resources/Outfits/FlowerRobe.tres" id="10_fwkga"]
 [ext_resource type="Resource" uid="uid://6tuf88mvvqem" path="res://Resources/Outfits/GraceRobe.tres" id="11_xtsem"]
 [ext_resource type="PackedScene" uid="uid://hfneyfwbwpbg" path="res://Scenes/BaseGameUI/InteractInstructions.tscn" id="12_l8olk"]
+[ext_resource type="Resource" uid="uid://cau55cbyjajq8" path="res://Resources/Outfits/PianoRobe.tres" id="13_b6njg"]
 
 [sub_resource type="Animation" id="Animation_vqbng"]
 length = 0.001
@@ -172,10 +173,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 840.0
-offset_top = 236.0
-offset_right = 1096.0
-offset_bottom = 364.0
+offset_left = -184.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = 64.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -232,7 +233,7 @@ mouse_filter = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-outfits = Array[Resource("res://Resources/OutfitData.gd")]([ExtResource("9_bmm2a"), ExtResource("10_fwkga"), ExtResource("11_xtsem")])
+outfits = Array[Resource("res://Resources/OutfitData.gd")]([ExtResource("9_bmm2a"), ExtResource("10_fwkga"), ExtResource("11_xtsem"), ExtResource("13_b6njg")])
 
 [node name="InteractInstructions" parent="." instance=ExtResource("12_l8olk")]
 visible = false
