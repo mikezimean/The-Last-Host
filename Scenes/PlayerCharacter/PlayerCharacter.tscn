@@ -1,27 +1,26 @@
-[gd_scene load_steps=51 format=3 uid="uid://hji8le5si4gx"]
+[gd_scene load_steps=50 format=3 uid="uid://hji8le5si4gx"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerCharacter/PlayerCharacter.gd" id="1_8numc"]
-[ext_resource type="Resource" uid="uid://0ubbegprkhdp" path="res://Resources/Weapons/Handcannon.tres" id="2_vwjhq"]
-[ext_resource type="Texture2D" uid="uid://b0vfiq1w0qkts" path="res://Assets/Originals/Sprite/alex_legs_sheet.png" id="2_wyi4t"]
+[ext_resource type="Texture2D" uid="uid://bpjewkd2jhrgf" path="res://Assets/Originals/Sprite/alex_legs_sheet.png" id="2_wyi4t"]
 [ext_resource type="PackedScene" uid="uid://blat6y3xgu67s" path="res://Scenes/StackedSprite/StackedSprite2D.tscn" id="3_lj23u"]
-[ext_resource type="Texture2D" uid="uid://cquohajeu50sq" path="res://Assets/Originals/Sprite/alex_head_sheet.png" id="4_af3j5"]
-[ext_resource type="Texture2D" uid="uid://bcfxlhyp5fj1r" path="res://Assets/Originals/Sprite/Alex_body_9.png" id="4_b3k0q"]
-[ext_resource type="Texture2D" uid="uid://bxed5qbba67hm" path="res://Assets/Originals/Sprite/alex_eyes_sheet.png" id="6_lxc57"]
-[ext_resource type="Texture2D" uid="uid://llqy01mj2xr8" path="res://Assets/Originals/Sprite/Hand_Cannon_7.png" id="10_kyaup"]
-[ext_resource type="AudioStream" uid="uid://du6vc3aji35uq" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_1.ogg" id="10_vecxr"]
+[ext_resource type="Texture2D" uid="uid://c68fhb0j1bftc" path="res://Assets/Originals/Sprite/alex_head_sheet.png" id="4_af3j5"]
+[ext_resource type="Texture2D" uid="uid://dx0ktb4vdrbiv" path="res://Assets/Originals/Sprite/Alex_body_9.png" id="4_b3k0q"]
+[ext_resource type="Texture2D" uid="uid://hhnnkf70838h" path="res://Assets/Originals/Sprite/alex_eyes_sheet.png" id="6_lxc57"]
+[ext_resource type="Texture2D" uid="uid://cvdfyoufex2cn" path="res://Assets/Originals/Sprite/Hand_Cannon_7.png" id="10_kyaup"]
+[ext_resource type="AudioStream" uid="uid://dj17sw6wghlk" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_1.ogg" id="10_vecxr"]
 [ext_resource type="PackedScene" uid="uid://c6dniymj4n4q3" path="res://Scenes/WeaponShot/WeaponShot.tscn" id="11_grgfw"]
-[ext_resource type="AudioStream" uid="uid://chsvhbqyk1p61" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_2.ogg" id="11_hdptx"]
-[ext_resource type="AudioStream" uid="uid://cxjc7knwwy4xr" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_3.ogg" id="12_eykfv"]
-[ext_resource type="AudioStream" uid="uid://b5wj01avgbrvp" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_4.ogg" id="13_t38ik"]
-[ext_resource type="AudioStream" uid="uid://duq60bgh7umpx" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_1.ogg" id="14_qm3x2"]
-[ext_resource type="AudioStream" uid="uid://cc3ce6hvadbyp" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_2.ogg" id="15_rq2ws"]
-[ext_resource type="AudioStream" uid="uid://c6ci6ibyukqre" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_3.ogg" id="16_avha5"]
-[ext_resource type="AudioStream" uid="uid://hjbgy0am1580" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_4.ogg" id="17_n52v5"]
+[ext_resource type="AudioStream" uid="uid://bht87d21s27w5" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_2.ogg" id="11_hdptx"]
+[ext_resource type="AudioStream" uid="uid://c7dfuwa57wpmv" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_3.ogg" id="12_eykfv"]
+[ext_resource type="AudioStream" uid="uid://ciledqjvy6qqh" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_4.ogg" id="13_t38ik"]
+[ext_resource type="AudioStream" uid="uid://cged22r0y5js8" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_1.ogg" id="14_qm3x2"]
+[ext_resource type="AudioStream" uid="uid://cjg43xga6slkx" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_2.ogg" id="15_rq2ws"]
+[ext_resource type="AudioStream" uid="uid://bxw2r4hw2gw3h" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_3.ogg" id="16_avha5"]
+[ext_resource type="AudioStream" uid="uid://du4cmonhp4s6f" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_4.ogg" id="17_n52v5"]
 [ext_resource type="PackedScene" uid="uid://33tu2t66ifbo" path="res://Scenes/StreamRepeater/StreamRepeater2D.tscn" id="18_vwqfm"]
-[ext_resource type="AudioStream" uid="uid://di543bfnquqlw" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing1.ogg" id="19_oj45g"]
-[ext_resource type="AudioStream" uid="uid://1a5iqn4ln2ke" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing2.ogg" id="20_v1pyo"]
-[ext_resource type="AudioStream" uid="uid://c1qqvbkgs0m3h" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing3.ogg" id="21_55lcn"]
-[ext_resource type="AudioStream" uid="uid://nefxh33w7hxv" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing4.ogg" id="22_7lwj4"]
+[ext_resource type="AudioStream" uid="uid://cr6o0hjwsd4el" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing1.ogg" id="19_oj45g"]
+[ext_resource type="AudioStream" uid="uid://oclrr6qp1yl0" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing2.ogg" id="20_v1pyo"]
+[ext_resource type="AudioStream" uid="uid://i41hlop4judy" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing3.ogg" id="21_55lcn"]
+[ext_resource type="AudioStream" uid="uid://b0ubc2qpgjrkv" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing4.ogg" id="22_7lwj4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ox0bi"]
 radius = 5.0
@@ -524,7 +523,6 @@ collision_layer = 5
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_8numc")
-weapons = Array[Resource("res://Resources/WeaponData.gd")]([ExtResource("2_vwjhq")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ox0bi")
