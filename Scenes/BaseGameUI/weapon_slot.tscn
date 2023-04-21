@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1fi6blxu8tf3"]
 
 [ext_resource type="Script" path="res://Scenes/BaseGameUI/weapon_slot.gd" id="1_2n7ro"]
-[ext_resource type="Texture2D" uid="uid://d12e0818sbluq" path="res://Assets/Originals/Sprite/weapon_previews.png" id="2_08ixj"]
+[ext_resource type="Texture2D" uid="uid://c2kcb0j7o3no6" path="res://Assets/Originals/Sprite/weapon_previews.png" id="2_08ixj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vbbce"]
 resource_local_to_scene = true
@@ -32,8 +32,10 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vbbce")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer"]
 layout_mode = 2
+mouse_filter = 2
 texture = SubResource("AtlasTexture_cty7c")
