@@ -6,7 +6,7 @@ signal damage_taken(current_position : Vector2, damage_amount : float)
 @export var movement_speed = 10
 
 var player_node : CharacterBody2D
-var health = max_health
+@onready var health = max_health
 
 
 func _physics_process(delta):
@@ -21,8 +21,11 @@ func hit(damage_amount):
 	health -= damage_amount
 	if health > 0:
 		$AnimationPlayer.play("HitFlash")
+		$HitStreamPlayer2D.play()
 	else:
+		$CollisionShape2D.disabled = true
 		$AnimationPlayer.play("FadeOut")
+		$DeathStreamPlayer2D.play()
 	emit_signal("damage_taken", position, damage_amount)
 
 

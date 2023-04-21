@@ -1,7 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjpv7pmyt7546"]
+[gd_scene load_steps=22 format=3 uid="uid://cjpv7pmyt7546"]
 
 [ext_resource type="Script" path="res://Scenes/EnemyCharacter/EnemyCharacter.gd" id="1_ckq15"]
-[ext_resource type="Texture2D" uid="uid://23tvsjfw562d" path="res://Assets/Originals/Sprite/characters_concept.png" id="1_j6xe7"]
+[ext_resource type="Texture2D" uid="uid://b45vjjguxj2i" path="res://Assets/Originals/Sprite/characters_concept.png" id="1_j6xe7"]
+[ext_resource type="AudioStream" uid="uid://nkmwyn8bmdt4" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_1.ogg" id="3_fjgx0"]
+[ext_resource type="AudioStream" uid="uid://cy1nh6wru5xrn" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_2.ogg" id="4_34wpj"]
+[ext_resource type="AudioStream" uid="uid://dqjyny50r8wpd" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_3.ogg" id="5_vk1ck"]
+[ext_resource type="AudioStream" uid="uid://cu4swn21m6yfa" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_4.ogg" id="6_3sawx"]
+[ext_resource type="AudioStream" uid="uid://bbirtv0882cj0" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_5.ogg" id="7_25m8k"]
+[ext_resource type="AudioStream" uid="uid://dbv7unephe11u" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_6.ogg" id="8_40xre"]
+[ext_resource type="AudioStream" uid="uid://ct4m8xep3obuk" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_7.ogg" id="9_eiffr"]
+[ext_resource type="AudioStream" uid="uid://bkcs1lgy8lr8l" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyHit_8.ogg" id="10_fxtp2"]
+[ext_resource type="AudioStream" uid="uid://duxecn0hk3v2u" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_1.ogg" id="11_0wvx4"]
+[ext_resource type="AudioStream" uid="uid://cesn7buxvolkc" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_2.ogg" id="12_hvnva"]
+[ext_resource type="AudioStream" uid="uid://bj6qk5ddxvdjb" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_3.ogg" id="13_5p8mg"]
+[ext_resource type="AudioStream" uid="uid://hp68npcfh7w7" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_EnemyDeath_4.ogg" id="14_4hddb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3s8qn"]
 
@@ -59,11 +71,42 @@ _data = {
 "RESET": SubResource("Animation_nwmqg")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bhyy0"]
+streams_count = 8
+stream_0/stream = ExtResource("3_fjgx0")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_34wpj")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_vk1ck")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("6_3sawx")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("7_25m8k")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("8_40xre")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("9_eiffr")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("10_fxtp2")
+stream_7/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r0cfp"]
+streams_count = 4
+stream_0/stream = ExtResource("11_0wvx4")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("12_hvnva")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("13_5p8mg")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("14_4hddb")
+stream_3/weight = 1.0
+
 [node name="EnemyCharacter" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 9
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_ckq15")
+max_health = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -78,5 +121,11 @@ shape = SubResource("CircleShape2D_3s8qn")
 libraries = {
 "": SubResource("AnimationLibrary_rnej7")
 }
+
+[node name="HitStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_bhyy0")
+
+[node name="DeathStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_r0cfp")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
