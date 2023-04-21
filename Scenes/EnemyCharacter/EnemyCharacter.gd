@@ -23,7 +23,7 @@ func hit(damage_amount):
 		$AnimationPlayer.play("HitFlash")
 		$HitStreamPlayer2D.play()
 	else:
-		$CollisionShape2D.disabled = true
+		$CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer.play("FadeOut")
 		$DeathStreamPlayer2D.play()
 	emit_signal("damage_taken", position, damage_amount)
