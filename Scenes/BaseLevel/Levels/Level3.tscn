@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb0l8uowfccoq"]
+[gd_scene load_steps=9 format=3 uid="uid://cb0l8uowfccoq"]
 
 [ext_resource type="PackedScene" uid="uid://itheimf3fono" path="res://Scenes/BaseLevel/BaseLevel.tscn" id="1_yk7li"]
 [ext_resource type="PackedScene" uid="uid://bpu5m7vuunslf" path="res://Scenes/WeaponPickup/WeaponPickup.tscn" id="2_7xhck"]
 [ext_resource type="PackedScene" uid="uid://du8jomg2cob25" path="res://Scenes/Spawners/ModularSpawner.tscn" id="2_75sh5"]
 [ext_resource type="Resource" uid="uid://dywocfhl4mh6p" path="res://Resources/Weapons/SawnOffShotgun.tres" id="3_o7fq7"]
 [ext_resource type="PackedScene" uid="uid://cjpv7pmyt7546" path="res://Scenes/EnemyCharacter/EnemyCharacter.tscn" id="3_qdt3o"]
+[ext_resource type="AudioStream" uid="uid://bfhblqeekhl36" path="res://Assets/Originals/Music/Godot_56_-_The_Last_Host_-_Music_-_TrackBoss.ogg" id="6_br3qt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vemc"]
 size = Vector2(105, 20)
@@ -12,7 +13,7 @@ size = Vector2(105, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vyas3"]
 size = Vector2(180, 20)
 
-[node name="Level2" instance=ExtResource("1_yk7li")]
+[node name="Level3" instance=ExtResource("1_yk7li")]
 
 [node name="PlayerCharacter" parent="CharacterContainer" index="0"]
 position = Vector2(9, 271)
@@ -66,3 +67,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnerContainer/Spawner3/Area2D" index="0"]
 shape = SubResource("RectangleShape2D_vyas3")
+
+[node name="LevelMusicStreamPlayer" parent="." index="11"]
+stream = ExtResource("6_br3qt")
