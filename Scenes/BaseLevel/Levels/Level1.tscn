@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqlqedbbyilwb"]
+[gd_scene load_steps=9 format=3 uid="uid://dqlqedbbyilwb"]
 
 [ext_resource type="PackedScene" uid="uid://itheimf3fono" path="res://Scenes/BaseLevel/BaseLevel.tscn" id="1_30vca"]
 [ext_resource type="PackedScene" uid="uid://du8jomg2cob25" path="res://Scenes/Spawners/ModularSpawner.tscn" id="2_hnmjd"]
 [ext_resource type="PackedScene" uid="uid://cjpv7pmyt7546" path="res://Scenes/EnemyCharacter/EnemyCharacter.tscn" id="3_cdrjc"]
 [ext_resource type="PackedScene" uid="uid://bpu5m7vuunslf" path="res://Scenes/WeaponPickup/WeaponPickup.tscn" id="4_uqgda"]
 [ext_resource type="Resource" uid="uid://djuphlvsh1v71" path="res://Resources/Weapons/Rifle.tres" id="5_k06k5"]
+[ext_resource type="AudioStream" uid="uid://dsfhxwskbucf4" path="res://Assets/Originals/Music/Godot_56_-_The_Last_Host_-_Music_-_Track1.ogg" id="6_04ofl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vemc"]
 size = Vector2(105, 20)
@@ -66,3 +67,6 @@ shape = SubResource("RectangleShape2D_vyas3")
 [node name="WeaponPickup" parent="." index="10" instance=ExtResource("4_uqgda")]
 position = Vector2(124, 67)
 weapon = ExtResource("5_k06k5")
+
+[node name="LevelMusicStreamPlayer" parent="." index="12"]
+stream = ExtResource("6_04ofl")

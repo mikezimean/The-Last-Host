@@ -1,14 +1,27 @@
-[gd_scene load_steps=36 format=3 uid="uid://hji8le5si4gx"]
+[gd_scene load_steps=51 format=3 uid="uid://hji8le5si4gx"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerCharacter/PlayerCharacter.gd" id="1_8numc"]
 [ext_resource type="Resource" uid="uid://0ubbegprkhdp" path="res://Resources/Weapons/Handcannon.tres" id="2_vwjhq"]
-[ext_resource type="Texture2D" uid="uid://bpjewkd2jhrgf" path="res://Assets/Originals/Sprite/alex_legs_sheet.png" id="2_wyi4t"]
+[ext_resource type="Texture2D" uid="uid://b0vfiq1w0qkts" path="res://Assets/Originals/Sprite/alex_legs_sheet.png" id="2_wyi4t"]
 [ext_resource type="PackedScene" uid="uid://blat6y3xgu67s" path="res://Scenes/StackedSprite/StackedSprite2D.tscn" id="3_lj23u"]
-[ext_resource type="Texture2D" uid="uid://c68fhb0j1bftc" path="res://Assets/Originals/Sprite/alex_head_sheet.png" id="4_af3j5"]
-[ext_resource type="Texture2D" uid="uid://dx0ktb4vdrbiv" path="res://Assets/Originals/Sprite/Alex_body_9.png" id="4_b3k0q"]
-[ext_resource type="Texture2D" uid="uid://hhnnkf70838h" path="res://Assets/Originals/Sprite/alex_eyes_sheet.png" id="6_lxc57"]
-[ext_resource type="Texture2D" uid="uid://cvdfyoufex2cn" path="res://Assets/Originals/Sprite/Hand_Cannon_7.png" id="10_kyaup"]
+[ext_resource type="Texture2D" uid="uid://cquohajeu50sq" path="res://Assets/Originals/Sprite/alex_head_sheet.png" id="4_af3j5"]
+[ext_resource type="Texture2D" uid="uid://bcfxlhyp5fj1r" path="res://Assets/Originals/Sprite/Alex_body_9.png" id="4_b3k0q"]
+[ext_resource type="Texture2D" uid="uid://bxed5qbba67hm" path="res://Assets/Originals/Sprite/alex_eyes_sheet.png" id="6_lxc57"]
+[ext_resource type="Texture2D" uid="uid://llqy01mj2xr8" path="res://Assets/Originals/Sprite/Hand_Cannon_7.png" id="10_kyaup"]
+[ext_resource type="AudioStream" uid="uid://du6vc3aji35uq" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_1.ogg" id="10_vecxr"]
 [ext_resource type="PackedScene" uid="uid://c6dniymj4n4q3" path="res://Scenes/WeaponShot/WeaponShot.tscn" id="11_grgfw"]
+[ext_resource type="AudioStream" uid="uid://chsvhbqyk1p61" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_2.ogg" id="11_hdptx"]
+[ext_resource type="AudioStream" uid="uid://cxjc7knwwy4xr" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_3.ogg" id="12_eykfv"]
+[ext_resource type="AudioStream" uid="uid://b5wj01avgbrvp" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Grass_4.ogg" id="13_t38ik"]
+[ext_resource type="AudioStream" uid="uid://duq60bgh7umpx" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_1.ogg" id="14_qm3x2"]
+[ext_resource type="AudioStream" uid="uid://cc3ce6hvadbyp" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_2.ogg" id="15_rq2ws"]
+[ext_resource type="AudioStream" uid="uid://c6ci6ibyukqre" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_3.ogg" id="16_avha5"]
+[ext_resource type="AudioStream" uid="uid://hjbgy0am1580" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_FS_Mud_4.ogg" id="17_n52v5"]
+[ext_resource type="PackedScene" uid="uid://33tu2t66ifbo" path="res://Scenes/StreamRepeater/StreamRepeater2D.tscn" id="18_vwqfm"]
+[ext_resource type="AudioStream" uid="uid://di543bfnquqlw" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing1.ogg" id="19_oj45g"]
+[ext_resource type="AudioStream" uid="uid://1a5iqn4ln2ke" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing2.ogg" id="20_v1pyo"]
+[ext_resource type="AudioStream" uid="uid://c1qqvbkgs0m3h" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing3.ogg" id="21_55lcn"]
+[ext_resource type="AudioStream" uid="uid://nefxh33w7hxv" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_Dashing4.ogg" id="22_7lwj4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ox0bi"]
 radius = 5.0
@@ -475,6 +488,37 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_k1fvu"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tuxxo"]
+streams_count = 8
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("10_vecxr")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_hdptx")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("12_eykfv")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("13_t38ik")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("14_qm3x2")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("15_rq2ws")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("16_avha5")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("17_n52v5")
+stream_7/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jq4kj"]
+streams_count = 4
+stream_0/stream = ExtResource("19_oj45g")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("20_v1pyo")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("21_55lcn")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("22_7lwj4")
+stream_3/weight = 1.0
+
 [node name="PlayerCharacter" type="CharacterBody2D" groups=["player"]]
 collision_layer = 5
 collision_mask = 3
@@ -565,6 +609,15 @@ one_shot = true
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="WalkingStreamRepeater2D" parent="." instance=ExtResource("18_vwqfm")]
+stream = SubResource("AudioStreamRandomizer_tuxxo")
+bus = &"SFX"
+repeat_delay = 0.6
+
+[node name="DashingStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_jq4kj")
+bus = &"SFX"
 
 [connection signal="projectile_shot" from="WeaponShot" to="." method="_on_weapon_shot_projectile_shot"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

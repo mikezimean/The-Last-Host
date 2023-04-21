@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://itheimf3fono"]
+[gd_scene load_steps=11 format=3 uid="uid://itheimf3fono"]
 
 [ext_resource type="Script" path="res://Scenes/BaseLevel/BaseLevel.gd" id="1_pd4tc"]
-[ext_resource type="Texture2D" uid="uid://djsayslb45vy6" path="res://Assets/Originals/Tiles/Mossy_floor.png" id="2_87i0s"]
-[ext_resource type="Texture2D" uid="uid://u28d23enkro8" path="res://Assets/Originals/Tiles/Steel_block.png" id="3_no24y"]
+[ext_resource type="Texture2D" uid="uid://ns3qpxnlxk6a" path="res://Assets/Originals/Tiles/Mossy_floor.png" id="2_87i0s"]
+[ext_resource type="Texture2D" uid="uid://pijchglmw0es" path="res://Assets/Originals/Tiles/Steel_block.png" id="3_no24y"]
 [ext_resource type="PackedScene" uid="uid://hji8le5si4gx" path="res://Scenes/PlayerCharacter/PlayerCharacter.tscn" id="4_75cy1"]
+[ext_resource type="AudioStream" uid="uid://bg31x0hip5tly" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_AmbienceLoop.ogg" id="5_yummu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7p3f"]
 texture = ExtResource("2_87i0s")
@@ -79,6 +80,17 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea2D"]
 shape = SubResource("RectangleShape2D_lxyqs")
+
+[node name="LevelMusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
+
+[node name="LevelAmbienceStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_yummu")
+volume_db = -5.0
+autoplay = true
+bus = &"SFX"
 
 [connection signal="casing_dropped" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_casing_dropped"]
 [connection signal="dash" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_dash"]

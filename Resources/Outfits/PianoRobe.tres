@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="OutfitData" load_steps=3 format=3 uid="uid://cau55cbyjajq8"]
+
+[ext_resource type="Script" path="res://Resources/OutfitData.gd" id="1_nydru"]
+[ext_resource type="Texture2D" uid="uid://bkl8hu50digjw" path="res://Assets/Originals/Sprite/Alex_piano_robe_9.png" id="2_3wf12"]
+
+[resource]
+script = ExtResource("1_nydru")
+name = "Piano Robe"
+sprite_stack = ExtResource("2_3wf12")

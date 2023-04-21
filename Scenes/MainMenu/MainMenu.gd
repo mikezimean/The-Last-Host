@@ -12,6 +12,7 @@ func load_scene(scene_path : String):
 
 func play_game():
 	GameLog.game_started()
+	await get_tree().create_timer(1).timeout
 	SceneLoader.load_scene(game_scene)
 
 func _open_sub_menu(menu : Control):
