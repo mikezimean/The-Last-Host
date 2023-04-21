@@ -96,6 +96,7 @@ func move_state(delta):
 	
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
+		$WalkingStreamRepeater2D.play_loop()
 		if is_dashing and can_dash:
 			velocity = input_vector * dash_speed
 			can_dash = false
@@ -103,6 +104,7 @@ func move_state(delta):
 			emit_signal("dash", $DashTimer.wait_time)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		$WalkingStreamRepeater2D.stop_loop()
 	move()
 
 func move():
