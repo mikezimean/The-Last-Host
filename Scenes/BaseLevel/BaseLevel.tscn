@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://itheimf3fono"]
+[gd_scene load_steps=10 format=3 uid="uid://itheimf3fono"]
 
 [ext_resource type="Script" path="res://Scenes/BaseLevel/BaseLevel.gd" id="1_pd4tc"]
-[ext_resource type="Texture2D" uid="uid://b4fb07a654ixh" path="res://Assets/Originals/Tiles/Mossy_floor.png" id="2_87i0s"]
-[ext_resource type="Texture2D" uid="uid://b74fky46i81ps" path="res://Assets/Originals/Tiles/Steel_block.png" id="3_no24y"]
-[ext_resource type="PackedScene" uid="uid://hji8le5si4gx" path="res://Scenes/PlayerCharacter/PlayerCharacter.tscn" id="4_75cy1"]
-[ext_resource type="AudioStream" uid="uid://53igvnh0jkrw" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_AmbienceLoop.ogg" id="5_yummu"]
+[ext_resource type="Texture2D" uid="uid://djsayslb45vy6" path="res://Assets/Originals/Tiles/Mossy_floor.png" id="2_87i0s"]
+[ext_resource type="Texture2D" uid="uid://u28d23enkro8" path="res://Assets/Originals/Tiles/Steel_block.png" id="3_no24y"]
+[ext_resource type="AudioStream" uid="uid://druij5ghvvl6e" path="res://Assets/Originals/SFX/Godot_56_-_The_Last_Host_-_SFX_-_AmbienceLoop.ogg" id="5_yummu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7p3f"]
 texture = ExtResource("2_87i0s")
@@ -53,11 +52,11 @@ layer_0/tile_data = PackedInt32Array(-65505, 0, 1, -65506, 0, 1, -65507, 0, 1, -
 
 [node name="CollectibleContainer" type="Node2D" parent="."]
 
+[node name="PlayerSpawnPoint" type="Node2D" parent="."]
+position = Vector2(64, 75)
+
 [node name="CharacterContainer" type="Node2D" parent="."]
 y_sort_enabled = true
-
-[node name="PlayerCharacter" parent="CharacterContainer" instance=ExtResource("4_75cy1")]
-position = Vector2(64, 64)
 
 [node name="InteractablesContainer" type="Node2D" parent="."]
 
@@ -92,9 +91,9 @@ volume_db = -2.0
 autoplay = true
 bus = &"SFX"
 
-[connection signal="casing_dropped" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_casing_dropped"]
-[connection signal="dash" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_dash"]
-[connection signal="new_weapon" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_new_weapon"]
-[connection signal="projectile_shot" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_projectile_shot"]
-[connection signal="weapon_changed" from="CharacterContainer/PlayerCharacter" to="." method="_on_player_character_weapon_changed"]
+[node name="CanExitTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="ExitArea2D" to="." method="_on_exit_area_2d_body_entered"]
+[connection signal="timeout" from="CanExitTimer" to="." method="_on_can_exit_timer_timeout"]

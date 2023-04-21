@@ -10,12 +10,12 @@ signal new_weapon(weapon_name : String)
 @export var max_speed : float = 125
 @export var friction : float = 600
 @export var dash_speed : float = 400
-@export var weapons : Array[WeaponData]
 @export var current_weapon_iter : int = 0
 
 @onready var animation_tree = $CharacterAnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 
+var weapons : Array[WeaponData] = [preload("res://Resources/Weapons/Handcannon.tres")]
 var is_shooting : bool = false
 var can_shoot : bool = true
 var facing_direction : Vector2
@@ -23,9 +23,8 @@ var is_dashing : bool = false
 var can_dash : bool = true
 
 #test init weapon ammo 
-func _ready():
-	for weapon in weapons:
-		weapon.ammunition_count = weapon.max_ammunition
+func _init():
+		weapons[0].ammunition_count = weapons[0].max_ammunition
 
 func _update_weapon_sprite():
 	var current_weapon : WeaponData = get_current_weapon()
