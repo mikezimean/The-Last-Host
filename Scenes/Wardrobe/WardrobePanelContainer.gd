@@ -8,6 +8,7 @@ signal wardrobe_closed
 @onready var buttons_container = $VBoxContainer/GridContainer
 
 func _on_outfit_button_pressed(sprite_stack : Texture2D):
+	$WardrobeChangeStreamPlayer.play()
 	emit_signal("outfit_changed", sprite_stack)
 
 func _clear_buttons():
